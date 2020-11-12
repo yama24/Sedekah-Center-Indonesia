@@ -97,17 +97,8 @@
 								<span class="fas fa-briefcase"></span>
 							</div>
 						</div>
-					</div>
-					<label>Provinsi</label>
-					<div class="input-group mb-3">
-						<select name="provinsi" class="form-control select2bs4" id="provinsi">
-							<option>- Pilih provinsi</option>
-							<?php foreach ($provinces as $prov) {
-								echo '<option value="' . $prov->id . '">' . ucwords(strtolower($prov->name)) . '</option>';
-							} ?>
-						</select>
-					</div>
-					<label>Kota/Kabupaten</label>
+					</div>-->
+					<!--<label>Kota/Kabupaten</label>
 					<div class="input-group mb-3">
 						<select name="kabupaten" class="form-control select2bs4" id="kabupaten">
 							<option value=''>Loading</option>
@@ -125,6 +116,7 @@
 							<option value=''>Loading</option>
 						</select>
 					</div> -->
+
 					<label>Nomor handphone</label>
 					<div class="input-group mb-3">
 						<input type="tel" class="form-control" placeholder="cth: 082161821282" name="phone" pattern="[0]{1}[8]{1}[0-9].{8,}" required>
@@ -134,7 +126,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- <label>Email</label>
+					<label>Email</label>
 					<div class="input-group mb-3">
 						<input type="email" class="form-control" placeholder="cth: email@gmail.com" name="email" required>
 						<div class="input-group-append">
@@ -142,7 +134,7 @@
 								<span class="fas fa-envelope"></span>
 							</div>
 						</div>
-					</div> -->
+					</div>
 					<label>Jumlah donasi</label>
 					<div class="input-group mb-3">
 						<input type="number" class="form-control" placeholder="cth: 100000" name="jumlah" required>
@@ -152,8 +144,20 @@
 							</div>
 						</div>
 					</div>
+					<label>Metode pembayaran</label>
+					<div class="input-group mb-3">
+						<select name="metode" class="form-control select2bs4">
+							<option>- Pilih metode pembayaran</option>
+							<?php foreach ($tripay['data'] as $td) {
+								foreach ($td['payment'] as $tp) {
+									echo '<option value="' . $tp['code'] . '">' . $tp['name'] . '</option>';
+								}
+							} ?>
+						</select>
+					</div>
 					<button class="btn btn-block btn-primary" type="submit">Submit</button>
 				</form>
+
 				<!-- <div class="social-auth-links text-center mb-3">
 					<p>- OR -</p>
 					<a href="#" class="btn btn-block btn-primary">

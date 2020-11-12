@@ -31,6 +31,29 @@ class Welcome extends CI_Controller
 	{
 		$data['pekerjaan'] = $this->m_data->get_data('pekerjaan')->result();
 		$data['provinces'] = $this->m_data->get_provinsi();
+
+		$apiKey = 'DEV-jdGWqcEiFi3U7YYdSgANI7d1yubL1cgYMPh0zapZ';
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_FRESH_CONNECT     => true,
+			CURLOPT_URL               => "https://payment.tripay.co.id/api-sandbox/payment/channel",
+			CURLOPT_RETURNTRANSFER    => true,
+			CURLOPT_HEADER            => false,
+			CURLOPT_HTTPHEADER        => array(
+				"Authorization: Bearer " . $apiKey
+			),
+			CURLOPT_FAILONERROR       => false
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+		$data['tripay'] = json_decode($response, true);
+
+
 		$this->load->view('frontend/v_homepage', $data);
 	}
 	function add_ajax_kab($id_prov)
@@ -66,51 +89,117 @@ class Welcome extends CI_Controller
 	public function terimakasih()
 	{
 		$data['links'] = $this->m_data->get_data('links')->result();
-		if ($this->session->userdata('status') != "telah_login_email") {
-			redirect(base_url() . '?alert=belum_isi');
-		}
+		// if ($this->session->userdata('status') != "telah_login_email") {
+		// 	redirect(base_url() . '?alert=belum_isi');
+		// }
 		$this->load->view('frontend/v_link', $data);
 	}
 	public function form_submit()
 	{
 		// Wajib isi judul,konten dan kategori
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
-		$this->form_validation->set_rules('phone', 'Nomor Handphone', 'required|is_unique[basis.basis_phone]');
+		$this->form_validation->set_rules('phone', 'Nomor Handphone', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('jumlah', 'Jumlah Donasi', 'required');
+		$this->form_validation->set_rules('metode', 'Metode Pembayaran', 'required');
 		//PHONE BELUM DI STANDARISASI
 		if ($this->form_validation->run() != false) {
 			$nama = $this->input->post('nama');
 			$phone = $this->input->post('phone');
+			$email = $this->input->post('email');
 			$jumlah = $this->input->post('jumlah');
+			$metode = $this->input->post('metode');
 			$datainput = date('Y-m-d H:i:s');
+			$inv = base_convert(microtime(false), 10, 36);
+			$status = "UNPAID";
 
 			$data = array(
-				'basis_nama' => $nama,
-				'basis_phone' => $phone,
-				'basis_jumlah' => $jumlah,
-				'basis_datainput' => $datainput,
+				'inv' => $inv,
+				'nama' => $nama,
+				'phone' => $phone,
+				'email' => $email,
+				'jumlah' => $jumlah,
+				'metode' => $metode,
+				'status' => $status,
+				'data_input' => $datainput,
 			);
-			$this->m_data->insert_data($data, 'basis');
+			$this->m_data->insert_data($data, 'transaksi');
+
+			$apiKey = 'DEV-jdGWqcEiFi3U7YYdSgANI7d1yubL1cgYMPh0zapZ';
+			$privateKey = 'kJaqf-bQV3Z-G6ssJ-O23dh-KD9QB';
+			$merchantCode = 'T1197';
+			$merchantRef = $inv;
+			$amount = 1000000;
+
+			$data = [
+				'method'            => $metode,
+				'merchant_ref'      => $merchantRef,
+				'amount'            => $amount,
+				'customer_name'     => $nama,
+				'customer_email'    => $email,
+				'customer_phone'    => $phone,
+				'order_items'       => [
+					[
+						// 'sku'       => 'PRODUK1',
+						'name'      => 'Donasi',
+						'price'     => $amount,
+						'quantity'  => 1
+					]
+				],
+				'callback_url'      => 'https://sci.test/callback',
+				'return_url'        => 'https://sci.test/',
+				'expired_time'      => (time() + (24 * 60 * 60)), // 24 jam
+				'signature'         => hash_hmac('sha256', $merchantCode.$merchantRef.$amount, $privateKey)
+			];
+
+			$curl = curl_init();
+
+			curl_setopt_array($curl, array(
+				CURLOPT_FRESH_CONNECT     => true,
+				CURLOPT_URL               => "https://payment.tripay.co.id/api-sandbox/transaction/create",
+				CURLOPT_RETURNTRANSFER    => true,
+				CURLOPT_HEADER            => false,
+				CURLOPT_HTTPHEADER        => array(
+					"Authorization: Bearer " . $apiKey
+				),
+				CURLOPT_FAILONERROR       => false,
+				CURLOPT_POST              => true,
+				CURLOPT_POSTFIELDS        => http_build_query($data)
+			));
+
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+
+			curl_close($curl);
+
+			$cekout = json_decode($response);
+
+			redirect($cekout->data->checkout_url);
+			
+
+			// echo !empty($err) ? $err : $response;
+
+
 			// $where = array(
 			// 	'pengguna_username' => $email,
 			// 	// 'pengguna_password' => "email",
 			// 	// 'pengguna_status' => 2
 			// );
-			$this->load->model('m_data');
+			// $this->load->model('m_data');
 			// $data = $this->m_data->cek_login('pengguna', $where)->row();
 
-			$data_session = array(
-				// 'id' => $data->pengguna_id,
-				// 'username' => $data->pengguna_username,
-				'name' => $nama,
-				'email' => $email,
-				'phone' => $email,
-				// 'photo' => $data->pengguna_foto,
-				// 'level' => $data->pengguna_level,
-				'status' =>
-				'telah_login_email'
-			);
-			$this->session->set_userdata($data_session);
+			// $data_session = array(
+			// 'id' => $data->pengguna_id,
+			// 'username' => $data->pengguna_username,
+			// 'name' => $nama,
+			// 'email' => $email,
+			// 'phone' => $email,
+			// 'photo' => $data->pengguna_foto,
+			// 'level' => $data->pengguna_level,
+			// 	'status' =>
+			// 	'telah_login_email'
+			// );
+			// $this->session->set_userdata($data_session);
 			// $data['user'] = $nama;
 			// $config['charset'] = 'utf-8';
 			// $config['smtp_crypto'] = $this->config->item('smtp_crypto');
@@ -133,7 +222,7 @@ class Welcome extends CI_Controller
 			// $this->email->subject('Notifikasi Input Data');
 			// $this->email->message($mesg);
 			// $this->email->send();
-			redirect(base_url() . 'welcome/terimakasih');
+			// redirect(base_url() . 'welcome/terimakasih');
 		} else {
 			// Ini tak terpakai
 			redirect(base_url() . '?alert=isiulang');
