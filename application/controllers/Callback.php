@@ -3,11 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Callback extends CI_Controller
 {
-	public function index()
+	public function a()
 	{
 
+
 		// include file koneksi database
-		require('database.php');
+		$db = $this->load->database();
 
 		// ambil data JSON
 		$json = file_get_contents("php://input");
@@ -28,16 +29,18 @@ class Callback extends CI_Controller
 
 		if ($event == 'payment_status') {
 			if ($data->status == 'PAID') {
-				$merchantRef = $db->real_escape_string($data->merchant_ref);
-
 				// pembayaran sukses, lanjutkan proses sesuai sistem Anda, contoh:
-				$sql = "SELECT * FROM transaksi WHERE inv = '" . $merchantRef . "' AND status = 'UNPAID' LIMIT 1";
-				if (($getInvoice = $db->query($sql))) {
-					while ($invoice = $getInvoice->fetch_object()) {
-						$update = "UPDATE transaksi SET status = 'PAID' WHERE id = {$invoice->id}";
-						$db->query($update) or die($db->error);
-					}
-				}
+				$array = array(
+					'diterima' => $data->amount_received,
+					'fee' => $data->fee,
+					'status' => $data->status,
+					'bayar' => $data->is_customer_fee,
+					'paid_at' => $data->paid_at
+				);
+				$this->db->set($array);
+				$this->db->where('inv', $data->merchant_ref);
+				$sql = $this->db->where('status', "UNPAID");
+				$this->db->update('transaksi');
 			}
 		}
 

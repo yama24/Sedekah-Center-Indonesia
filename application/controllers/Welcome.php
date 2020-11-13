@@ -30,7 +30,6 @@ class Welcome extends CI_Controller
 	public function index()
 	{
 		$data['pekerjaan'] = $this->m_data->get_data('pekerjaan')->result();
-		$data['provinces'] = $this->m_data->get_provinsi();
 
 		$apiKey = 'DEV-jdGWqcEiFi3U7YYdSgANI7d1yubL1cgYMPh0zapZ';
 
@@ -60,26 +59,6 @@ class Welcome extends CI_Controller
 	{
 		$query = $this->db->get_where('regencies', array('province_id' => $id_prov));
 		$data = "<option value=''>- Select Kabupaten -</option>";
-		foreach ($query->result() as $value) {
-			$data .= "<option value='" . $value->id . "'>" . ucwords(strtolower($value->name)) . "</option>";
-		}
-		echo $data;
-	}
-
-	function add_ajax_kec($id_kab)
-	{
-		$query = $this->db->get_where('districts', array('regency_id' => $id_kab));
-		$data = "<option value=''> - Pilih Kecamatan - </option>";
-		foreach ($query->result() as $value) {
-			$data .= "<option value='" . $value->id . "'>" . ucwords(strtolower($value->name)) . "</option>";
-		}
-		echo $data;
-	}
-
-	function add_ajax_des($id_kec)
-	{
-		$query = $this->db->get_where('villages', array('district_id' => $id_kec));
-		$data = "<option value=''> - Pilih Desa - </option>";
 		foreach ($query->result() as $value) {
 			$data .= "<option value='" . $value->id . "'>" . ucwords(strtolower($value->name)) . "</option>";
 		}
@@ -129,7 +108,7 @@ class Welcome extends CI_Controller
 			$privateKey = 'kJaqf-bQV3Z-G6ssJ-O23dh-KD9QB';
 			$merchantCode = 'T1197';
 			$merchantRef = $inv;
-			$amount = 1000000;
+			$amount = $jumlah;
 
 			$data = [
 				'method'            => $metode,
@@ -146,7 +125,7 @@ class Welcome extends CI_Controller
 						'quantity'  => 1
 					]
 				],
-				'callback_url'      => 'https://sci.test/callback',
+				'callback_url'      => 'https://sci.test/callback/a',
 				'return_url'        => 'https://sci.test/',
 				'expired_time'      => (time() + (24 * 60 * 60)), // 24 jam
 				'signature'         => hash_hmac('sha256', $merchantCode.$merchantRef.$amount, $privateKey)
@@ -174,10 +153,10 @@ class Welcome extends CI_Controller
 
 			$cekout = json_decode($response);
 
-			redirect($cekout->data->checkout_url);
-			
+			// redirect($cekout->data->checkout_url);
 
-			// echo !empty($err) ? $err : $response;
+
+			echo !empty($err) ? $err : $response;
 
 
 			// $where = array(
