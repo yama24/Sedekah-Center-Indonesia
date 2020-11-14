@@ -145,15 +145,32 @@
 						</div>
 					</div>
 					<label>Metode pembayaran</label>
-					<div class="input-group mb-3">
+					<!-- <div class="input-group mb-3">
 						<select name="metode" class="form-control select2bs4">
 							<option>- Pilih metode pembayaran</option>
-							<?php foreach ($tripay['data'] as $td) {
-								foreach ($td['payment'] as $tp) {
-									echo '<option value="' . $tp['code'] . '">' . $tp['name'] . '</option>';
+							<?php foreach ($tripay->data as $td) {
+								foreach ($td->payment as $tp) {
+									if ($tp->code == 'QRIS') { ?>
+										<option value="<?php echo $tp->code ?>"><?php echo $tp->name ?><small> bca pakai ini</small></option>
+									<?php } else { ?>
+										<option value="<?php echo $tp->code ?>"><?php echo $tp->name ?></option>
+							<?php }
 								}
 							} ?>
 						</select>
+					</div> -->
+					<div class="input-group mb-3">
+						<!-- radio -->
+						<div class="form-group">
+							<?php foreach ($tripay->data as $td) {
+								foreach ($td->payment as $tp) { ?>
+									<div class="custom-control custom-radio">
+										<input class="custom-control-input" type="radio" id="<?php echo $tp->code ?>" name="metode" value="<?php echo $tp->code ?>">
+										<label for="<?php echo $tp->code ?>" class="custom-control-label" value><img style="height: 30px;" class="img-fluid" src="<?php echo base_url()?>assets/dist/img/pay/<?php echo $tp->code ?>.png" alt=""> (<?php echo $tp->name ?>)<br><br></label>
+									</div>
+							<?php }
+							} ?>
+						</div>
 					</div>
 					<button class="btn btn-block btn-primary" type="submit">Submit</button>
 				</form>

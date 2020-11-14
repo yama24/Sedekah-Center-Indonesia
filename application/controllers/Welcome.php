@@ -29,15 +29,13 @@ class Welcome extends CI_Controller
 	}
 	public function index()
 	{
-		$data['pekerjaan'] = $this->m_data->get_data('pekerjaan')->result();
-
-		$apiKey = 'DEV-jdGWqcEiFi3U7YYdSgANI7d1yubL1cgYMPh0zapZ';
+		$apiKey = $this->config->item('api_key');;
 
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
 			CURLOPT_FRESH_CONNECT     => true,
-			CURLOPT_URL               => "https://payment.tripay.co.id/api-sandbox/payment/channel",
+			CURLOPT_URL               => $this->config->item('url_tripay') . "payment/channel",
 			CURLOPT_RETURNTRANSFER    => true,
 			CURLOPT_HEADER            => false,
 			CURLOPT_HTTPHEADER        => array(
@@ -50,19 +48,10 @@ class Welcome extends CI_Controller
 		$err = curl_error($curl);
 
 		curl_close($curl);
-		$data['tripay'] = json_decode($response, true);
+		$data['tripay'] = json_decode($response);
 
 
 		$this->load->view('frontend/v_homepage', $data);
-	}
-	function add_ajax_kab($id_prov)
-	{
-		$query = $this->db->get_where('regencies', array('province_id' => $id_prov));
-		$data = "<option value=''>- Select Kabupaten -</option>";
-		foreach ($query->result() as $value) {
-			$data .= "<option value='" . $value->id . "'>" . ucwords(strtolower($value->name)) . "</option>";
-		}
-		echo $data;
 	}
 
 	public function terimakasih()
@@ -92,21 +81,9 @@ class Welcome extends CI_Controller
 			$inv = base_convert(microtime(false), 10, 36);
 			$status = "UNPAID";
 
-			$data = array(
-				'inv' => $inv,
-				'nama' => $nama,
-				'phone' => $phone,
-				'email' => $email,
-				'jumlah' => $jumlah,
-				'metode' => $metode,
-				'status' => $status,
-				'data_input' => $datainput,
-			);
-			$this->m_data->insert_data($data, 'transaksi');
-
-			$apiKey = 'DEV-jdGWqcEiFi3U7YYdSgANI7d1yubL1cgYMPh0zapZ';
-			$privateKey = 'kJaqf-bQV3Z-G6ssJ-O23dh-KD9QB';
-			$merchantCode = 'T1197';
+			$apiKey = $this->config->item('api_key');
+			$privateKey = $this->config->item('private_key');
+			$merchantCode = $this->config->item('kode_merchant');
 			$merchantRef = $inv;
 			$amount = $jumlah;
 
@@ -125,8 +102,8 @@ class Welcome extends CI_Controller
 						'quantity'  => 1
 					]
 				],
-				'callback_url'      => 'https://sci.test/callback/a',
-				'return_url'        => 'https://sci.test/',
+				'callback_url'      => base_url('callback/a'),
+				'return_url'        => base_url(),
 				'expired_time'      => (time() + (24 * 60 * 60)), // 24 jam
 				'signature'         => hash_hmac('sha256', $merchantCode.$merchantRef.$amount, $privateKey)
 			];
@@ -135,7 +112,7 @@ class Welcome extends CI_Controller
 
 			curl_setopt_array($curl, array(
 				CURLOPT_FRESH_CONNECT     => true,
-				CURLOPT_URL               => "https://payment.tripay.co.id/api-sandbox/transaction/create",
+				CURLOPT_URL               => $this->config->item('url_tripay') . "transaction/create",
 				CURLOPT_RETURNTRANSFER    => true,
 				CURLOPT_HEADER            => false,
 				CURLOPT_HTTPHEADER        => array(
@@ -150,13 +127,29 @@ class Welcome extends CI_Controller
 			$err = curl_error($curl);
 
 			curl_close($curl);
-
 			$cekout = json_decode($response);
+			$data = array(
+				'inv' => $cekout->data->merchant_ref,
+				'reference' => $cekout->data->reference,
+				'nama' => $cekout->data->customer_name,
+				'phone' => $cekout->data->customer_phone,
+				'email' => $cekout->data->customer_email,
+				'jumlah' => $cekout->data->amount,
+				'fee' => $cekout->data->fee,
+				'diterima' => $cekout->data->amount_received,
+				'bayar' => $cekout->data->is_customer_fee,
+				'nama_metode' => $cekout->data->payment_name,
+				'metode' => $cekout->data->payment_method,
+				'pay_code' => $cekout->data->pay_code,
+				'status' => $cekout->data->status,
+				'data_input' => $datainput,
+			);
+			$this->m_data->insert_data($data, 'transaksi');
 
-			// redirect($cekout->data->checkout_url);
+			redirect($cekout->data->checkout_url);
 
 
-			echo !empty($err) ? $err : $response;
+			// echo !empty($err) ? $err : $response;
 
 
 			// $where = array(

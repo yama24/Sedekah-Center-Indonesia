@@ -31,10 +31,7 @@ class Callback extends CI_Controller
 			if ($data->status == 'PAID') {
 				// pembayaran sukses, lanjutkan proses sesuai sistem Anda, contoh:
 				$array = array(
-					'diterima' => $data->amount_received,
-					'fee' => $data->fee,
 					'status' => $data->status,
-					'bayar' => $data->is_customer_fee,
 					'paid_at' => $data->paid_at
 				);
 				$this->db->set($array);
