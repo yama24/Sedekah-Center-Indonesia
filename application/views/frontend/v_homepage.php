@@ -162,14 +162,12 @@
 					<div class="input-group mb-3">
 						<!-- radio -->
 						<div class="form-group">
-							<?php foreach ($tripay->data as $td) {
-								foreach ($td->payment as $tp) { ?>
+							<?php foreach ($tripay as $tp) {  ?>
 									<div class="custom-control custom-radio">
 										<input class="custom-control-input" type="radio" id="<?php echo $tp->code ?>" name="metode" value="<?php echo $tp->code ?>">
 										<label for="<?php echo $tp->code ?>" class="custom-control-label" value><img style="height: 30px;" class="img-fluid" src="<?php echo base_url()?>assets/dist/img/pay/<?php echo $tp->code ?>.png" alt=""> (<?php echo $tp->name ?>)<br><br></label>
 									</div>
-							<?php }
-							} ?>
+							<?php } ?>
 						</div>
 					</div>
 					<button class="btn btn-block btn-primary" type="submit">Submit</button>

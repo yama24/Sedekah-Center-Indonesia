@@ -29,26 +29,27 @@ class Welcome extends CI_Controller
 	}
 	public function index()
 	{
-		$apiKey = $this->config->item('api_key');;
+		// $apiKey = $this->config->item('api_key');;
 
-		$curl = curl_init();
+		// $curl = curl_init();
 
-		curl_setopt_array($curl, array(
-			CURLOPT_FRESH_CONNECT     => true,
-			CURLOPT_URL               => $this->config->item('url_tripay') . "payment/channel",
-			CURLOPT_RETURNTRANSFER    => true,
-			CURLOPT_HEADER            => false,
-			CURLOPT_HTTPHEADER        => array(
-				"Authorization: Bearer " . $apiKey
-			),
-			CURLOPT_FAILONERROR       => false
-		));
+		// curl_setopt_array($curl, array(
+		// 	CURLOPT_FRESH_CONNECT     => true,
+		// 	CURLOPT_URL               => $this->config->item('url_tripay') . "payment/channel",
+		// 	CURLOPT_RETURNTRANSFER    => true,
+		// 	CURLOPT_HEADER            => false,
+		// 	CURLOPT_HTTPHEADER        => array(
+		// 		"Authorization: Bearer " . $apiKey
+		// 	),
+		// 	CURLOPT_FAILONERROR       => false
+		// ));
 
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
+		// $response = curl_exec($curl);
+		// $err = curl_error($curl);
 
-		curl_close($curl);
-		$data['tripay'] = json_decode($response);
+		// curl_close($curl);
+		// $data['tripay'] = json_decode($response);
+		$data['tripay'] = $this->m_data->get_data('metode_pembayaran')->result();
 
 
 		$this->load->view('frontend/v_homepage', $data);
