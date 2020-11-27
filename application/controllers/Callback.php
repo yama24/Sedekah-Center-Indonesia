@@ -37,29 +37,30 @@ class Callback extends CI_Controller
 				$this->db->where('status', "UNPAID");
 				$this->db->update('transaksi');
 
-				$email['transaksi'] = $this->db->get_where('transaksi', ['inv' => $data->merchant_ref])->result();
+				// $email['transaksi'] = $this->db->get_where('transaksi', ['inv' => $data->merchant_ref])->result();
+				// $mail = $this->db->select('(SELECT transaksi.email FROM transaksi WHERE transaksi.inv = $data->merchant_ref)', FALSE);
 
-				$config['charset'] = 'utf-8';
-				$config['smtp_crypto'] = $this->config->item('smtp_crypto');
-				$config['protocol'] = 'smtp';
-				$config['mailtype'] = 'html';
-				$config['smtp_host'] = $this->config->item('host_mail');
-				$config['smtp_port'] = $this->config->item('port_mail');
-				$config['smtp_timeout'] = '5';
-				$config['smtp_user'] = $this->config->item('mail_account');
-				$config['smtp_pass'] = $this->config->item('pass_mail');
-				$config['crlf'] = "\r\n";
-				$config['newline'] = "\r\n";
-				$config['wordwrap'] = TRUE;
+				// $config['charset'] = 'utf-8';
+				// $config['smtp_crypto'] = $this->config->item('smtp_crypto');
+				// $config['protocol'] = 'smtp';
+				// $config['mailtype'] = 'html';
+				// $config['smtp_host'] = $this->config->item('host_mail');
+				// $config['smtp_port'] = $this->config->item('port_mail');
+				// $config['smtp_timeout'] = '5';
+				// $config['smtp_user'] = $this->config->item('mail_account');
+				// $config['smtp_pass'] = $this->config->item('pass_mail');
+				// $config['crlf'] = "\r\n";
+				// $config['newline'] = "\r\n";
+				// $config['wordwrap'] = TRUE;
 
-				$mesg = $this->load->view('email/notif.php', $email, TRUE);
-				$this->load->library('email', $config);
+				// $mesg = $this->load->view('email/notif.php', $email, TRUE);
+				// $this->load->library('email', $config);
 
-				$this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
-				$this->email->to($email, $this->config->item('mail_account'));
-				$this->email->subject('Terima Kasih Kami Ucapkan');
-				$this->email->message($mesg);
-				$this->email->send();
+				// $this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
+				// $this->email->to($data->customer_email, $this->config->item('mail_account'));
+				// $this->email->subject('Terima Kasih Kami Ucapkan');
+				// $this->email->message($mesg);
+				// $this->email->send();
 			}
 		}
 
