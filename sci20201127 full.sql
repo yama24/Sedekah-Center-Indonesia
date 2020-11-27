@@ -11,64 +11,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- membuang struktur untuk table sci.basis
-CREATE TABLE IF NOT EXISTS `basis` (
-  `basis_id` int(250) NOT NULL AUTO_INCREMENT,
-  `basis_nama` text NOT NULL,
-  `basis_ttl` date NOT NULL,
-  `basis_tempat_kerja` text NOT NULL,
-  `basis_gender` text NOT NULL,
-  `basis_pekerjaan` text NOT NULL,
-  `basis_provinsi` text NOT NULL,
-  `basis_kabupaten` text NOT NULL,
-  `basis_kecamatan` text NOT NULL,
-  `basis_desa` text NOT NULL,
-  `basis_phone` double NOT NULL,
-  `basis_email` text NOT NULL,
-  `basis_datainput` datetime NOT NULL,
-  PRIMARY KEY (`basis_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
-
--- Membuang data untuk tabel sci.basis: ~4 rows (lebih kurang)
-/*!40000 ALTER TABLE `basis` DISABLE KEYS */;
-INSERT INTO `basis` (`basis_id`, `basis_nama`, `basis_ttl`, `basis_tempat_kerja`, `basis_gender`, `basis_pekerjaan`, `basis_provinsi`, `basis_kabupaten`, `basis_kecamatan`, `basis_desa`, `basis_phone`, `basis_email`, `basis_datainput`) VALUES
-	(20, 'Abi Fakhri', '2020-11-11', 'iNTERNUSA', 'Pria', 'Ketua Yayasan', '11', '1101', '1101030', '1101030003', 85294030933, 'abifakhrinabhanrabbani@gmail.c', '2020-11-08 17:09:29'),
-	(21, 'Yayan Maulana', '1995-07-24', 'Internusa', 'Pria', 'Pengusaha', '32', '3273', '3273110', '3273110003', 8986182128, 'maulana24@live.com', '2020-11-09 08:46:09'),
-	(22, 'Teh Javana', '2020-11-09', 'asdasd', 'Pria', 'Pengusaha', '16', '1604', '1604011', '1604011006', 8986565665, 'uchuhanif25@gmail.com', '2020-11-09 08:48:55'),
-	(23, 'Afni', '2020-11-17', 'fssds', 'Wanita', 'Ibu Rumah Tangga', '36', '3603', '3603011', '3603011002', 8170123437, '1a@gmail.com', '2020-11-12 14:03:32');
-/*!40000 ALTER TABLE `basis` ENABLE KEYS */;
-
--- membuang struktur untuk table sci.links
-CREATE TABLE IF NOT EXISTS `links` (
-  `links_id` int(11) NOT NULL AUTO_INCREMENT,
-  `links_tipe` text NOT NULL,
-  `links_nama` text NOT NULL,
-  `links` text NOT NULL,
-  PRIMARY KEY (`links_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
-
--- Membuang data untuk tabel sci.links: ~2 rows (lebih kurang)
-/*!40000 ALTER TABLE `links` DISABLE KEYS */;
-INSERT INTO `links` (`links_id`, `links_tipe`, `links_nama`, `links`) VALUES
-	(5, 'Whatsapp', 'Vidpro 1', 'https://chat.whatsapp.com/IoVhIYYh6Sb0nbATG7LPKD'),
-	(6, 'Whatsapp', 'GROUP HTM 2', 'https://chat.whatsapp.com/GCirMCqhC5sGqhkL3aeCLE');
-/*!40000 ALTER TABLE `links` ENABLE KEYS */;
-
--- membuang struktur untuk table sci.linkstype
-CREATE TABLE IF NOT EXISTS `linkstype` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tipe` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
--- Membuang data untuk tabel sci.linkstype: ~3 rows (lebih kurang)
-/*!40000 ALTER TABLE `linkstype` DISABLE KEYS */;
-INSERT INTO `linkstype` (`id`, `tipe`) VALUES
-	(1, 'Whatsapp'),
-	(2, 'Telegram'),
-	(3, 'Lainnya');
-/*!40000 ALTER TABLE `linkstype` ENABLE KEYS */;
-
 -- membuang struktur untuk table sci.metode_pembayaran
 CREATE TABLE IF NOT EXISTS `metode_pembayaran` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -90,27 +32,6 @@ INSERT INTO `metode_pembayaran` (`id`, `group_id`, `code`, `name`) VALUES
 	(7, 4, 'ALFAMIDI', 'Alfamidi'),
 	(8, 5, 'QRIS', 'QRIS');
 /*!40000 ALTER TABLE `metode_pembayaran` ENABLE KEYS */;
-
--- membuang struktur untuk table sci.pekerjaan
-CREATE TABLE IF NOT EXISTS `pekerjaan` (
-  `pekerjaan_id` int(11) NOT NULL AUTO_INCREMENT,
-  `pekerjaan` text NOT NULL,
-  PRIMARY KEY (`pekerjaan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
-
--- Membuang data untuk tabel sci.pekerjaan: ~9 rows (lebih kurang)
-/*!40000 ALTER TABLE `pekerjaan` DISABLE KEYS */;
-INSERT INTO `pekerjaan` (`pekerjaan_id`, `pekerjaan`) VALUES
-	(4, 'Pelajar'),
-	(5, 'Mahasiswa'),
-	(6, 'Ibu Rumah Tangga'),
-	(7, 'PNS'),
-	(8, 'Guru'),
-	(9, 'Pengusaha'),
-	(10, 'Kepala Sekolah'),
-	(11, 'Karyawan'),
-	(12, 'Ketua Yayasan');
-/*!40000 ALTER TABLE `pekerjaan` ENABLE KEYS */;
 
 -- membuang struktur untuk table sci.pengguna
 CREATE TABLE IF NOT EXISTS `pengguna` (
@@ -149,15 +70,15 @@ CREATE TABLE IF NOT EXISTS `transaksi` (
   `paid_at` int(50) NOT NULL,
   `nama_metode` text NOT NULL,
   `metode` text NOT NULL,
-  `pay_code` text NOT NULL,
+  `checkout_url` text NOT NULL,
   `status` text NOT NULL,
   `data_input` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Membuang data untuk tabel sci.transaksi: ~7 rows (lebih kurang)
 /*!40000 ALTER TABLE `transaksi` DISABLE KEYS */;
-INSERT INTO `transaksi` (`id`, `inv`, `reference`, `nama`, `phone`, `email`, `jumlah`, `fee`, `diterima`, `bayar`, `paid_at`, `nama_metode`, `metode`, `pay_code`, `status`, `data_input`) VALUES
+INSERT INTO `transaksi` (`id`, `inv`, `reference`, `nama`, `phone`, `email`, `jumlah`, `fee`, `diterima`, `bayar`, `paid_at`, `nama_metode`, `metode`, `checkout_url`, `status`, `data_input`) VALUES
 	(1, '4u6j60xfaxeu', '', 'Yayan Maulana', 81385410721, 'maulana24@live.com', 123345, 0, 0, 0, 0, '', 'ALFAMART', '', 'UNPAID', '2020-11-13 22:47:50'),
 	(2, '2f3za6vfmnd0', '', 'Yayan Maulana', 81385410721, 'maulana24@live.com', 123345, 0, 0, 0, 0, '', 'ALFAMART', '', 'UNPAID', '2020-11-13 22:48:20'),
 	(3, '121g3m32ql0f', '', 'Yayan Maulana', 81385410721, 'maulana24@live.com', 123345, 0, 0, 0, 0, '', 'ALFAMART', '', 'UNPAID', '2020-11-13 22:48:47'),
@@ -165,7 +86,8 @@ INSERT INTO `transaksi` (`id`, `inv`, `reference`, `nama`, `phone`, `email`, `ju
 	(5, 'd4k3kkd8vu9', '', 'Yayan Maulana', 8986182128, 'maulana24@live.com', 300000, 0, 0, 0, 0, '', 'MANDIRIVA', '', 'UNPAID', '2020-11-14 18:32:01'),
 	(6, '3x405dqn19ok', 'DEV-T119700000022233H3YK', 'Muhammad Alfaraz Ibn Yama', 8986182128, 'yama.alfaraz@gmail.com', 500000, 3750, 496250, 0, 0, 'Permata Virtual Account', 'PERMATAVA', '6650678060', 'UNPAID', '2020-11-14 18:57:56'),
 	(7, 'drxysi4kgqg', 'DEV-T11970000002225X1T7R', 'Umar bin Khatab', 8986182128, 'maulana24@live.com', 20000, 3750, 16250, 0, 0, 'Permata Virtual Account', 'PERMATAVA', '8184386026', 'UNPAID', '2020-11-14 20:38:00'),
-	(8, '21f00gljb3kz', 'DEV-T11970000002226QPL5L', 'yanto', 8986182128, 'maulana24@live.com', 12000, 834, 11166, 0, 0, 'QRIS', 'QRIS', '9100059087', 'UNPAID', '2020-11-14 20:38:43');
+	(8, '21f00gljb3kz', 'DEV-T11970000002226QPL5L', 'yanto', 8986182128, 'maulana24@live.com', 12000, 834, 11166, 0, 0, 'QRIS', 'QRIS', '9100059087', 'UNPAID', '2020-11-14 20:38:43'),
+	(9, '53h79fyy1rym', 'DEV-T11970000002338L9TMR', 'Yayan Maulana', 8986182128, 'maulana24@live.com', 123122, 1612, 121510, 0, 0, 'QRIS', 'QRIS', '2549878376', 'UNPAID', '2020-11-27 22:39:58');
 /*!40000 ALTER TABLE `transaksi` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

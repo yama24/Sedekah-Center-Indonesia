@@ -141,7 +141,7 @@ class Welcome extends CI_Controller
 				'bayar' => $cekout->data->is_customer_fee,
 				'nama_metode' => $cekout->data->payment_name,
 				'metode' => $cekout->data->payment_method,
-				'pay_code' => $cekout->data->pay_code,
+				'checkout_url' => $cekout->data->checkout_url,
 				'status' => $cekout->data->status,
 				'data_input' => $datainput,
 			);
