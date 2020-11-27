@@ -369,24 +369,13 @@
 								<table border="0" cellpadding="0" cellspacing="0">
 									<tr>
 										<td>
-											<h3><b>Hai <?php echo $user ?>,</b></h3>
+											<h3><b>Hai <b><?php echo $transaksi['nama'] ?></b>,</b></h3>
 											<p>
-												terima kasih<br>
-												Berikut daftar linknya :
+												terima kasih atas donasinya sebesar <b>Rp. <?php echo number_format($transaksi['jumlah']) ?></b>
 											</p>
-											<table style="border-collapse: collapse;">
-												<tr>
-													<th>Tipe</th>
-													<th>Link</th>
-												</tr>
-												<tr>
-													<?php foreach ($links as $l) { ?>
-														<td style="text-align: center;"><?php echo $l->links_tipe ?></td>
-														<td style="text-align: center;"><a href="<?php echo $l->links ?>"><b><?php echo $l->links_nama ?></b></a></td>
-													<?php } ?>
-												</tr>
-											</table>
-											<br>
+											<p>
+												Mudah-mudahan berkah dan menjadi wasilah dimudahkannya dalam segala urusan
+											</p> <br>
 											<p>Terima kasih.</p>
 										</td>
 									</tr>
@@ -409,7 +398,7 @@
 							</tr> -->
 							<tr>
 								<td class="content-block powered-by">
-									Powered by <a href="<?php echo base_url() ?>"><b>Input </b>Data</a>.
+									Powered by <a href="<?php echo base_url() ?>"><b>Donasi </b>SCI</a>.
 								</td>
 							</tr>
 						</table>

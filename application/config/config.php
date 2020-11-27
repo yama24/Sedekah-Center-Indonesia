@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 // my config
+$config['app_name'] = 'Donasi SCI';
 $config['mail_account'] = 'admin@blindo.id';
 $config['pass_mail'] = 'admin';
 $config['host_mail'] = 'srv50.niagahoster.com';
