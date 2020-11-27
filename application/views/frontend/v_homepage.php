@@ -28,14 +28,14 @@
 		<div class="login-logo">
 			<!--<b>Input </b>Data-->
 		</div>
-		<center><img src="<?php echo base_url() ?>assets/dist/img/internusa.png" alt="" width="50"></center>
+		<center><img src="<?php echo base_url() ?>assets/dist/img/sci.png" alt="" width="200"></center>
 		<div class="login-logo">
-			<b>Input </b>Data
+			<!-- <b>Input </b>Data -->
 		</div>
 		<!-- /.login-logo -->
 		<div class="card">
 			<div class="card-header" style="background-color: #007bff;">
-				<center> <span class="login-box-msg" style="color: white;">Silahkan input data untuk melanjutkan</span> </center>
+				<center> <span class="login-box-msg" style="color: white;">Silahkan isi data untuk berdonasi</span> </center>
 			</div>
 			<div class="card-body login-card-body">
 
@@ -53,7 +53,7 @@
 				<form action="<?php echo base_url('welcome/form_submit'); ?>" method="post">
 					<label>Nama</label>
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Isi dengan nama lengkap" name="nama" required>
+						<input type="text" class="form-control" placeholder="Isi dengan nama lengkap atau &#34Hamba Allah&#34" name="nama" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -160,7 +160,6 @@
 						</select>
 					</div> -->
 					<div class="input-group mb-3">
-						<!-- radio -->
 						<div class="form-group">
 							<?php foreach ($tripay as $tp) {  ?>
 									<div class="custom-control custom-radio">
@@ -170,7 +169,7 @@
 							<?php } ?>
 						</div>
 					</div>
-					<button class="btn btn-block btn-primary" type="submit">Submit</button>
+					<button class="btn btn-block btn-danger" type="submit">Submit</button>
 				</form>
 
 				<!-- <div class="social-auth-links text-center mb-3">
