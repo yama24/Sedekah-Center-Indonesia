@@ -55,12 +55,12 @@ class Welcome extends CI_Controller
 		$this->load->view('frontend/v_homepage', $data);
 	}
 
-	public function terimakasih()
+	public function terimakasih($slug)
 	{
-		$data['links'] = $this->m_data->get_data('links')->result();
-		// if ($this->session->userdata('status') != "telah_login_email") {
-		// 	redirect(base_url() . '?alert=belum_isi');
-		// }
+		$data['json'] = $this->db->get_where('json', ['inv' => $slug])->row_array();
+		if ($this->session->userdata('inv') != $slug) {
+			redirect(base_url() . '?alert=belum_isi');
+		}
 		$this->load->view('frontend/v_link', $data);
 	}
 	public function form_submit()
@@ -145,9 +145,36 @@ class Welcome extends CI_Controller
 				'status' => $cekout->data->status,
 				'data_input' => $datainput,
 			);
+			$json = array(
+				'inv' => $cekout->data->merchant_ref,
+				'json' => $response,
+			);
 			$this->m_data->insert_data($data, 'transaksi');
+			$this->m_data->insert_data($json, 'json');
 
-			redirect($cekout->data->checkout_url);
+			$data_session = array(
+				'inv' => $cekout->data->merchant_ref,
+				'reference' => $cekout->data->reference,
+				'nama' => $cekout->data->customer_name,
+				'phone' => $cekout->data->customer_phone,
+				'email' => $cekout->data->customer_email,
+				'jumlah' => $cekout->data->amount,
+				'fee' => $cekout->data->fee,
+				'diterima' => $cekout->data->amount_received,
+				'bayar' => $cekout->data->is_customer_fee,
+				'nama_metode' => $cekout->data->payment_name,
+				'metode' => $cekout->data->payment_method,
+				'checkout_url' => $cekout->data->checkout_url,
+				'pay_code' => $cekout->data->pay_code,
+				'qr_url' => $cekout->data->qr_url,
+				'expired_time' => $cekout->data->expired_time,
+				'status' => $cekout->data->status,
+				'data_input' => $datainput,
+			);
+			$this->session->set_userdata($data_session);
+			$slug = $cekout->data->merchant_ref;
+
+			redirect(base_url('welcome/terimakasih/') . $slug);
 
 
 			// echo !empty($err) ? $err : $response;
@@ -200,5 +227,9 @@ class Welcome extends CI_Controller
 			// Ini tak terpakai
 			redirect(base_url() . '?alert=isiulang');
 		}
+	}
+	public function notfound()
+	{
+		$this->load->view('404');
 	}
 }

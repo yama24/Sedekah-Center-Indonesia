@@ -34,7 +34,7 @@
 		</div>
 		<!-- /.login-logo -->
 		<div class="card">
-			<div class="card-header" style="background-color: #007bff;">
+			<div class="card-header" style="background-color: #C82333;">
 				<center> <span class="login-box-msg" style="color: white;">Silahkan isi data untuk berdonasi</span> </center>
 			</div>
 			<div class="card-body login-card-body">
