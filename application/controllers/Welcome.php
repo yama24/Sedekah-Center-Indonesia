@@ -174,7 +174,7 @@ class Welcome extends CI_Controller
 			$this->session->set_userdata($data_session);
 			$slug = $cekout->data->merchant_ref;
 
-			redirect(base_url('welcome/terimakasih/') . $slug);
+			redirect(base_url('terimakasih/') . $slug);
 
 
 			// echo !empty($err) ? $err : $response;

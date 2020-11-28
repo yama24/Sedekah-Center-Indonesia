@@ -52,13 +52,13 @@ class M_data extends CI_Model
 		$this->db->order_by("basis.basis_id", "desc");
 		return $this->db->get("basis");
 	}
-	public function getJsonBySlug($slug)
-	{
-		$this->db->select('json.json AS json');
-		$this->db->from("json");
-		$this->db->where('json.inv', $slug);
-		return $this->db->get()->row_array();
-	}
+	// public function getJsonBySlug($slug)
+	// {
+	// 	$this->db->select('json.json AS json');
+	// 	$this->db->from("json");
+	// 	$this->db->where('json.inv', $slug);
+	// 	return $this->db->get()->row_array();
+	// }
 
 
 	// AKHIR FUNGSI CRUD
