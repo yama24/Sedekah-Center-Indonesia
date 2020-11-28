@@ -54,7 +54,6 @@ $route['default_controller'] = 'welcome';
 $route['login'] = 'login';
 // route dashboard
 $route['dashboard'] = 'dashboard';
-$route['terimakasih'] = 'welcome/terimakasih';
 $route['terimakasih/(:any)'] = 'welcome/terimakasih/$1';
 // route URL SEO untuk artikel
 $route['(:any)'] = 'welcome/single/$1';
