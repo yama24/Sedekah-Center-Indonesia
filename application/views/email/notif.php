@@ -4,7 +4,7 @@
 <head>
 	<meta name="viewport" content="width=device-width" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Konfirmasi Pesanan</title>
+	<title>Konfirmasi Donasi</title>
 	<style>
 		/* -------------------------------------
           GLOBAL RESETS
@@ -358,9 +358,9 @@
 				<div class="content">
 
 					<!-- START CENTERED WHITE CONTAINER -->
-					<span class="preheader">Notifikasi Input Data</span>
-					<h1><img src="<?= base_url();  ?>assets/dist/img/internusa.png" alt=""></h1>
-					<h1><b>Input </b>Data</h1>
+					<span class="preheader">Konfirmasi Donasi</span>
+					<h1><img src="<?= base_url();  ?>assets/dist/img/scismall.png" alt=""></h1>
+					<h1><b>Donasi </b>SCI</h1>
 					<table class="main">
 
 						<!-- START MAIN CONTENT AREA -->
@@ -369,9 +369,9 @@
 								<table border="0" cellpadding="0" cellspacing="0">
 									<tr>
 										<td>
-											<h3><b>Hai <b><?php echo $transaksi['nama'] ?></b>,</b></h3>
+											<h3><b>Hai nama,</b></h3>
 											<p>
-												terima kasih atas donasinya sebesar <b>Rp. <?php echo number_format($transaksi['jumlah']) ?></b>
+												terima kasih atas donasinya sebesar <b>Rp. 100000</b>
 											</p>
 											<p>
 												Mudah-mudahan berkah dan menjadi wasilah dimudahkannya dalam segala urusan

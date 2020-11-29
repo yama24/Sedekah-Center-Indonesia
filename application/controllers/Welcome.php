@@ -59,7 +59,7 @@ class Welcome extends CI_Controller
 	{
 		$data['json'] = $this->db->get_where('json', ['inv' => $slug])->row_array();
 		if ($this->session->userdata('inv') != $slug) {
-			redirect(base_url() . '?alert=belum_isi');
+			redirect(base_url() . '404');
 		}
 		$this->load->view('frontend/v_link', $data);
 	}
@@ -216,5 +216,9 @@ class Welcome extends CI_Controller
 	public function notfound()
 	{
 		$this->load->view('404');
+	}
+	public function notif()
+	{
+		$this->load->view('email/notif');
 	}
 }
