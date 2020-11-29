@@ -141,7 +141,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<div class="card">
+									<div class="card card-outline card-success">
 										<div class="card-header">
 											<h3 class="card-title">Instruksi Pembayaran</h3>
 										</div>
@@ -172,7 +172,7 @@
 									</div>
 								</div>
 							</div>
-							<a href="<?php echo base_url() ?>" class="btn btn-block btn-sm btn-info">Selesai</a>
+							<a href="<?php echo base_url() ?>" class="btn btn-block btn-sm btn-success">Selesai</a>
 						</div>
 						<!-- /.login-card-body -->
 					</div>
