@@ -131,10 +131,14 @@
 									</table>
 								</div>
 							</div>
-							<!-- /.row -->
-							<?php if (isset($json->data->qr_url)) { ?>
-								<center>QRIS<br><img src="<?php echo $json->data->qr_url; ?>" alt="" srcset=""></center>
-							<?php } ?>
+							<br>
+							<div class="row">
+								<div class="col-md-12">
+									<?php if (isset($json->data->qr_url)) { ?>
+										<center><b>QRIS</b><br><img src="<?php echo $json->data->qr_url; ?>" alt="" srcset=""></center><br>
+									<?php } ?>
+								</div>
+							</div>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="card">
