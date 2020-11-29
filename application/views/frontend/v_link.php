@@ -41,7 +41,7 @@
 					<?php $json = json_decode($json['json']) ?>
 					<div class="card">
 						<div class="card-header" style="background-color: #e8e8e8;">
-							<center><span class="login-box-msg" style="color: black;"><img src="<?php echo base_url() ?>assets/dist/img/pay/<?php echo $json->data->payment_method ?>.png" height="50px" alt="" srcset=""><br><?php echo $json->data->payment_name ?></span></center>
+							<center><span class="login-box-msg" style="color: black;"><img src="<?php echo base_url() ?>assets/dist/img/pay/<?php echo $json->data->payment_method ?>.png" width="200px" alt="" srcset=""><br><?php echo $json->data->payment_name ?></span></center>
 						</div>
 						<div class="card-body login-card-body">
 							<?php

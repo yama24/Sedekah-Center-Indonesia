@@ -161,12 +161,16 @@
 					</div> -->
 					<div class="input-group mb-3">
 						<div class="form-group">
-							<?php foreach ($tripay as $tp) {  ?>
-									<div class="custom-control custom-radio">
-										<input class="custom-control-input" type="radio" id="<?php echo $tp->code ?>" name="metode" value="<?php echo $tp->code ?>">
-										<label for="<?php echo $tp->code ?>" class="custom-control-label" value><img style="height: 30px;" class="img-fluid" src="<?php echo base_url()?>assets/dist/img/pay/<?php echo $tp->code ?>.png" alt=""> (<?php echo $tp->name ?>)<br><br></label>
+							<div class="row">
+								<?php foreach ($tripay as $tp) {  ?>
+									<div class="col-md-3">
+										<div class="custom-control custom-radio">
+											<input class="custom-control-input" type="radio" id="<?php echo $tp->code ?>" name="metode" value="<?php echo $tp->code ?>">
+											<label for="<?php echo $tp->code ?>" class="custom-control-label" value><img class="img-fluid" src="<?php echo base_url() ?>assets/dist/img/pay/<?php echo $tp->code ?>.png" alt=""><br>(<?php echo $tp->name ?>)<br><br></label>
+										</div>
 									</div>
-							<?php } ?>
+								<?php } ?>
+							</div>
 						</div>
 					</div>
 					<button class="btn btn-block btn-danger" type="submit">Submit</button>
