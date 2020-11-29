@@ -78,9 +78,12 @@ class Welcome extends CI_Controller
 			$email = $this->input->post('email');
 			$jumlah = $this->input->post('jumlah');
 			$metode = $this->input->post('metode');
-			$datainput = date('Y-m-d H:i:s');
+			// $datainput = date('Y-m-d H:i:s');
+			$input_year = date('Y');
+			$input_month = date('m');
+			$input_date = date('d');
+			$input_time = date('H:i:s');
 			$inv = base_convert(microtime(false), 10, 36);
-			$status = "UNPAID";
 
 			$apiKey = $this->config->item('api_key');
 			$privateKey = $this->config->item('private_key');
@@ -143,7 +146,10 @@ class Welcome extends CI_Controller
 				'metode' => $cekout->data->payment_method,
 				'checkout_url' => $cekout->data->checkout_url,
 				'status' => $cekout->data->status,
-				'data_input' => $datainput,
+				'input_year' => $input_year,
+				'input_month' => $input_month,
+				'input_date' => $input_date,
+				'input_time' => $input_time,
 			);
 			$json = array(
 				'inv' => $cekout->data->merchant_ref,
@@ -169,38 +175,16 @@ class Welcome extends CI_Controller
 				'qr_url' => $cekout->data->qr_url,
 				'expired_time' => $cekout->data->expired_time,
 				'status' => $cekout->data->status,
-				'data_input' => $datainput,
+				'input_year' => $input_year,
+				'input_month' => $input_month,
+				'input_date' => $input_date,
+				'input_time' => $input_time,
 			);
 			$this->session->set_userdata($data_session);
 			$slug = $cekout->data->merchant_ref;
 
-			redirect(base_url('terimakasih/') . $slug);
-
-
 			// echo !empty($err) ? $err : $response;
 
-
-			// $where = array(
-			// 	'pengguna_username' => $email,
-			// 	// 'pengguna_password' => "email",
-			// 	// 'pengguna_status' => 2
-			// );
-			// $this->load->model('m_data');
-			// $data = $this->m_data->cek_login('pengguna', $where)->row();
-
-			// $data_session = array(
-			// 'id' => $data->pengguna_id,
-			// 'username' => $data->pengguna_username,
-			// 'name' => $nama,
-			// 'email' => $email,
-			// 'phone' => $email,
-			// 'photo' => $data->pengguna_foto,
-			// 'level' => $data->pengguna_level,
-			// 	'status' =>
-			// 	'telah_login_email'
-			// );
-			// $this->session->set_userdata($data_session);
-			// $data['user'] = $nama;
 			// $config['charset'] = 'utf-8';
 			// $config['smtp_crypto'] = $this->config->item('smtp_crypto');
 			// $config['protocol'] = 'smtp';
@@ -222,7 +206,8 @@ class Welcome extends CI_Controller
 			// $this->email->subject('Notifikasi Input Data');
 			// $this->email->message($mesg);
 			// $this->email->send();
-			// redirect(base_url() . 'welcome/terimakasih');
+
+			redirect(base_url('terimakasih/') . $slug);
 		} else {
 			// Ini tak terpakai
 			redirect(base_url() . '?alert=isiulang');
