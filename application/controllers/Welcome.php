@@ -221,8 +221,32 @@ class Welcome extends CI_Controller
 	}
 	// public function notif()
 	// {
-	// 	$slug = "5oxtuhiydf2p"; //cek di inv table json database
-	// 	$eml['json'] = $this->db->get_where('json', ['inv' => $slug])->row_array();
-	// 	$this->load->view('email/notif', $eml);
+	// 	$apiKey = $this->config->item('api_key');
+	// 	$reference = "DEV-T11970000002384OHUGV" ;
+
+	// 	$curl = curl_init();
+		
+
+	// 	curl_setopt_array($curl, array(
+	// 		CURLOPT_FRESH_CONNECT     => true,
+	// 		CURLOPT_URL               => $this->config->item('url_tripay') . "transaction/detail?reference=" . $reference,
+	// 		CURLOPT_RETURNTRANSFER    => true,
+	// 		CURLOPT_HEADER            => false,
+	// 		CURLOPT_HTTPHEADER        => array(
+	// 			"Authorization: Bearer " . $apiKey
+	// 		),
+	// 		CURLOPT_FAILONERROR       => false,
+	// 		CURLOPT_POST              => false,
+	// 	));
+
+	// 	$response = curl_exec($curl);
+	// 	$err = curl_error($curl);
+
+	// 	curl_close($curl);
+	// 	$detail = json_decode($response);
+
+	// 	$eml['json'] = $response;
+
+	// 	$this->load->view('email/pembayaran_berhasil', $eml);
 	// }
 }

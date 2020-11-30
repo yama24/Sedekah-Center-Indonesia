@@ -60,7 +60,7 @@ class Callback extends CI_Controller
 				curl_close($curl);
 				$detail = json_decode($response);
 	
-				$eml['json'] = $json;
+				$eml['json'] = $response;
 
 				$config['charset'] = 'utf-8';
 				$config['smtp_crypto'] = $this->config->item('smtp_crypto');
@@ -80,7 +80,7 @@ class Callback extends CI_Controller
 
 				$this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
 				$this->email->to($detail->data->customer_email, $this->config->item('mail_account'));
-				$this->email->subject('Terima Kasih Kami Ucapkan');
+				$this->email->subject('Pembayaran Berhasil');
 				$this->email->message($mesg);
 				$this->email->send();
 			}

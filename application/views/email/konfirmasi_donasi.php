@@ -379,21 +379,21 @@
 											<table>
 												<tr>
 													<td>Metode Pembayaran</td>
-													<td><b><?php echo $json->data->payment_name ?></b></td>
+													<td>: <b><?php echo $json->data->payment_name ?></b></td>
 												</tr>
 												<tr>
 													<td>No. Referensi</td>
-													<td><b><?php echo $json->data->reference ?></b></td>
+													<td>: <b><?php echo $json->data->reference ?></b></td>
 												</tr>
 												<?php if ($json->data->pay_code != null) { ?>
 													<tr>
 														<td style="padding-right:20px;">Kode Bayar/No. VA</td>
-														<td><b><?php echo $json->data->pay_code ?></b></td>
+														<td>: <b><?php echo $json->data->pay_code ?></b></td>
 													</tr>
 												<?php } ?>
 												<tr>
 													<td>Total Tagihan</td>
-													<td><b>Rp. <?php echo str_replace(",", ".", number_format($json->data->amount)) ?></b></td>
+													<td>: <b>Rp. <?php echo str_replace(",", ".", number_format($json->data->amount)) ?></b></td>
 												</tr>
 												<?php if (isset($json->data->qr_url)) { ?>
 													<tr align="center">
