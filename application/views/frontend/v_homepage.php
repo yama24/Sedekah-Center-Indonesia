@@ -38,7 +38,9 @@
 						</div>
 						<!-- /.login-logo -->
 						<div class="card">
-							<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+							<!-- banner -->
+							<?php if ($setting['banner'] == 1) { ?>
+								<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 								<ol class="carousel-indicators">
 									<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -64,6 +66,8 @@
 									<span class="sr-only">Next</span>
 								</a>
 							</div>
+							<?php } ?>
+							<!-- end banner -->
 							<div class="card-header" style="background-color: #C82333;">
 								<center> <span class="login-box-msg" style="color: white;">Silahkan isi data untuk berdonasi</span> </center>
 							</div>
