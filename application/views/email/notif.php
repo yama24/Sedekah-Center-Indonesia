@@ -356,13 +356,11 @@
 			<td>&nbsp;</td>
 			<td class="container">
 				<div class="content">
-
 					<!-- START CENTERED WHITE CONTAINER -->
 					<span class="preheader">Konfirmasi Donasi</span>
 					<h1><img src="<?= base_url();  ?>assets/dist/img/scismall.png" alt=""></h1>
 					<h1><?php echo $this->config->item('app_name') ?></h1>
 					<table class="main">
-
 						<!-- START MAIN CONTENT AREA -->
 						<tr>
 							<td class="wrapper">
@@ -375,7 +373,7 @@
 												terima kasih telah berdonasi melalui <b><?php echo $this->config->item('app_name') ?></b><br>tinggal satu langkah lagi untuk menyelesaikan proses ini.<br>
 											</p>
 											<p>
-												Silahkan melakukan pembayaran dibawah ini : 
+												Silahkan melakukan pembayaran dibawah ini :
 											</p>
 											<table>
 												<tr>
@@ -395,46 +393,42 @@
 													<th style="border: 1px solid #555555; padding: 10px;">Harga</th>
 													<th style="border: 1px solid #555555; padding: 10px;">Total</th>
 												</tr>
-													<tr>
-														<td style="border: 1px solid #555555; padding: 10px;">kritcu</td>
-														<td style="border: 1px solid #555555; padding: 10px;">5</td>
-														<td style="border: 1px solid #555555; padding: 10px;">10000</td>
-														<td style="border: 1px solid #555555; padding: 10px;">50000</td>
-													</tr>
+												<tr>
+													<td style="border: 1px solid #555555; padding: 10px;">kritcu</td>
+													<td style="border: 1px solid #555555; padding: 10px;">5</td>
+													<td style="border: 1px solid #555555; padding: 10px;">10000</td>
+													<td style="border: 1px solid #555555; padding: 10px;">50000</td>
+												</tr>
 											</table>
 											<br />
 											<table>
-													<tr>
-														<td>Total Harga</td>
-														<td>Rp <?php echo number_format("50000", 0, ',', '.') ?></td>
-													</tr>
-													<tr>
-														<td>Biaya Pengiriman</td>
-														<td>Rp <?php echo number_format("10000", 0, ',', '.') ?></td>
-													</tr>
-													<tr>
-														<td style="padding-right:20px;"><strong>Total Keseluruhan</strong></td>
-														<td><strong>Rp <?php echo number_format("60000", 0, ',', '.') ?></strong></td>
-													</tr>
+												<tr>
+													<td>Total Harga</td>
+													<td>Rp <?php echo number_format("50000", 0, ',', '.') ?></td>
+												</tr>
+												<tr>
+													<td>Biaya Pengiriman</td>
+													<td>Rp <?php echo number_format("10000", 0, ',', '.') ?></td>
+												</tr>
+												<tr>
+													<td style="padding-right:20px;"><strong>Total Keseluruhan</strong></td>
+													<td><strong>Rp <?php echo number_format("60000", 0, ',', '.') ?></strong></td>
+												</tr>
 											</table>
 											<p>Silakan pilih metode pembayaran yang tersedia dibawah ini:</p>
-												<p><strong>BCA</strong><br />
-													Atas Nama :Yayan<br />
-													No Rekening :456824458</p>
-
+											<p><strong>BCA</strong><br />
+												Atas Nama :Yayan<br />
+												No Rekening :456824458</p>
 											<br />
 											<p>Pesanan akan dikirim setelah kami menerima pembayaran Anda.</p>
-
 											<p>Terima kasih.</p>
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
-
 						<!-- END MAIN CONTENT AREA -->
 					</table>
-
 					<!-- START FOOTER -->
 					<div class="footer">
 						<table border="0" cellpadding="0" cellspacing="0">
@@ -453,7 +447,6 @@
 						</table>
 					</div>
 					<!-- END FOOTER -->
-
 					<!-- END CENTERED WHITE CONTAINER -->
 				</div>
 			</td>
