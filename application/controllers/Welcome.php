@@ -185,27 +185,29 @@ class Welcome extends CI_Controller
 
 			// echo !empty($err) ? $err : $response;
 
-			// $config['charset'] = 'utf-8';
-			// $config['smtp_crypto'] = $this->config->item('smtp_crypto');
-			// $config['protocol'] = 'smtp';
-			// $config['mailtype'] = 'html';
-			// $config['smtp_host'] = $this->config->item('host_mail');
-			// $config['smtp_port'] = $this->config->item('port_mail');
-			// $config['smtp_timeout'] = '5';
-			// $config['smtp_user'] = $this->config->item('mail_account');
-			// $config['smtp_pass'] = $this->config->item('pass_mail');
-			// $config['crlf'] = "\r\n";
-			// $config['newline'] = "\r\n";
-			// $config['wordwrap'] = TRUE;
+			$eml['json'] = $response;
 
-			// $mesg = $this->load->view('email/notif.php', $data, TRUE);
-			// $this->load->library('email', $config);
+			$config['charset'] = 'utf-8';
+			$config['smtp_crypto'] = $this->config->item('smtp_crypto');
+			$config['protocol'] = 'smtp';
+			$config['mailtype'] = 'html';
+			$config['smtp_host'] = $this->config->item('host_mail');
+			$config['smtp_port'] = $this->config->item('port_mail');
+			$config['smtp_timeout'] = '5';
+			$config['smtp_user'] = $this->config->item('mail_account');
+			$config['smtp_pass'] = $this->config->item('pass_mail');
+			$config['crlf'] = "\r\n";
+			$config['newline'] = "\r\n";
+			$config['wordwrap'] = TRUE;
 
-			// $this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
-			// $this->email->to($email, $this->config->item('mail_account'));
-			// $this->email->subject('Notifikasi Input Data');
-			// $this->email->message($mesg);
-			// $this->email->send();
+			$mesg = $this->load->view('email/notif.php', $eml, TRUE);
+			$this->load->library('email', $config);
+
+			$this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
+			$this->email->to($cekout->data->customer_email, $this->config->item('mail_account'));
+			$this->email->subject('Konfirmasi Donasi');
+			$this->email->message($mesg);
+			$this->email->send();
 
 			redirect(base_url('terimakasih/') . $slug);
 		} else {
@@ -217,8 +219,10 @@ class Welcome extends CI_Controller
 	{
 		$this->load->view('404');
 	}
-	public function notif()
-	{
-		$this->load->view('email/notif');
-	}
+	// public function notif()
+	// {
+	// 	$slug = "5oxtuhiydf2p"; //cek di inv table json database
+	// 	$eml['json'] = $this->db->get_where('json', ['inv' => $slug])->row_array();
+	// 	$this->load->view('email/notif', $eml);
+	// }
 }

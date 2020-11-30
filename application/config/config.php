@@ -3,9 +3,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 // my config
 $config['app_name'] = 'Donasi SCI';
-$config['mail_account'] = 'admin@blindo.id';
-$config['pass_mail'] = 'admin';
-$config['host_mail'] = 'srv50.niagahoster.com';
+$config['mail_account'] = 'admin@sedekahcenter.com';
+$config['pass_mail'] = 'admininternusa';
+$config['host_mail'] = 'mail.sedekahcenter.com';
 $config['port_mail'] = '465';
 $config['smtp_crypto'] = 'ssl';
 $config['email_contact'] = 'blindonusantara@gmail.com';

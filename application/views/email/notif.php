@@ -16,7 +16,7 @@
 		}
 
 		body {
-			background-image: linear-gradient(to right, #74ebd5, #acb6e5);
+			background-color: #90D1DD;
 			font-family: sans-serif;
 			-webkit-font-smoothing: antialiased;
 			font-size: 14px;
@@ -46,7 +46,7 @@
       ------------------------------------- */
 
 		.body {
-			background-image: linear-gradient(to right, #74ebd5, #acb6e5);
+			background-color: #90D1DD;
 			width: 100%;
 		}
 
@@ -364,11 +364,12 @@
 						<!-- START MAIN CONTENT AREA -->
 						<tr>
 							<td class="wrapper">
+								<?php $json = json_decode($json) ?>
 								<table border="0" cellpadding="0" cellspacing="0">
 									<tr>
 										<td>
 											<h3><b>Konfirmasi Donasi</b></h3>
-											<p>Hi nama,</p>
+											<p>Hi <?php echo $json->data->customer_name ?>,</p>
 											<p>
 												terima kasih telah berdonasi melalui <b><?php echo $this->config->item('app_name') ?></b><br>tinggal satu langkah lagi untuk menyelesaikan proses ini.<br>
 											</p>
@@ -377,16 +378,54 @@
 											</p>
 											<table>
 												<tr>
-													<td>Kode Pesanan</td>
-													<td><strong>asdasd123123</strong></td>
+													<td>Metode Pembayaran</td>
+													<td><b><?php echo $json->data->payment_name ?></b></td>
 												</tr>
 												<tr>
-													<td style="padding-right:20px;">Tanggal Pesanan</td>
-													<td>20201127</td>
+													<td>No. Referensi</td>
+													<td><b><?php echo $json->data->reference ?></b></td>
 												</tr>
+												<?php if ($json->data->pay_code != null) { ?>
+													<tr>
+														<td style="padding-right:20px;">Kode Bayar/No. VA</td>
+														<td><b><?php echo $json->data->pay_code ?></b></td>
+													</tr>
+												<?php } ?>
+												<tr>
+													<td>Total Tagihan</td>
+													<td><b>Rp. <?php echo str_replace(",", ".", number_format($json->data->amount)) ?></b></td>
+												</tr>
+												<?php if (isset($json->data->qr_url)) { ?>
+													<tr align="center">
+														<td>QRIS</td>
+													</tr>
+													<tr align="center">
+														<td><img src="<?php echo $json->data->qr_url ?>" alt=""></td>
+													</tr>
+												<?php } ?>
+											</table>
+											<br>
+											<table>
+												<tr>
+													<td><b>Instruksi Pembayaran</b></td>
+												</tr>
+												<?php foreach ($json->data->instructions as $ins) { ?>
+													<tr>
+														<td><?php echo $ins->title ?></td>
+													</tr>
+													<tr>
+														<td>
+															<ol>
+																<?php foreach ($ins->steps as $steps) { ?>
+																	<li><?php echo $steps ?></li>
+																<?php } ?>
+															</ol>
+														</td>
+													</tr>
+												<?php } ?>
 											</table>
 											<br />
-											<table style="border-collapse: collapse;">
+											<!-- <table style="border-collapse: collapse;">
 												<tr>
 													<th style="border: 1px solid #555555; padding: 10px;">Produk</th>
 													<th style="border: 1px solid #555555; padding: 10px;">Jumlah</th>
@@ -399,8 +438,8 @@
 													<td style="border: 1px solid #555555; padding: 10px;">10000</td>
 													<td style="border: 1px solid #555555; padding: 10px;">50000</td>
 												</tr>
-											</table>
-											<br />
+											</table> -->
+											<!-- <br />
 											<table>
 												<tr>
 													<td>Total Harga</td>
@@ -414,13 +453,14 @@
 													<td style="padding-right:20px;"><strong>Total Keseluruhan</strong></td>
 													<td><strong>Rp <?php echo number_format("60000", 0, ',', '.') ?></strong></td>
 												</tr>
-											</table>
-											<p>Silakan pilih metode pembayaran yang tersedia dibawah ini:</p>
+											</table> -->
+											<!-- <p>Silakan pilih metode pembayaran yang tersedia dibawah ini:</p>
 											<p><strong>BCA</strong><br />
 												Atas Nama :Yayan<br />
 												No Rekening :456824458</p>
 											<br />
-											<p>Pesanan akan dikirim setelah kami menerima pembayaran Anda.</p>
+											<p>Pesanan akan dikirim setelah kami menerima pembayaran Anda.</p> -->
+											<p>Semoga donasi ini menjadi wasilah kebaikan dan dimudahkannya dalam segala urusan</p>
 											<p>Terima kasih.</p>
 										</td>
 									</tr>
@@ -441,7 +481,7 @@
 							</tr> -->
 							<tr>
 								<td class="content-block powered-by">
-									Powered by <a href="<?php echo base_url() ?>"><b>Donasi </b>SCI</a>.
+									Powered by <a href="<?php echo base_url() ?>"><b>Sedelah Center Indonesia</a>.
 								</td>
 							</tr>
 						</table>
