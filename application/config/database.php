@@ -76,12 +76,20 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
+
 	// 'username' => 'u5462684_yama',
 	// 'password' => 'Muhammad2417',
 	// 'database' => 'u5462684_sci',
+
+	// 'username' => 'internus_yama24',
+	// 'password' => 'Muhammad2417',
+	// 'database' => 'internus_sci',
+
+
 	'username' => 'root',
 	'password' => '',
 	'database' => 'sci',
+	
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
