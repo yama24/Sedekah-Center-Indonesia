@@ -5,6 +5,7 @@ class Callback extends CI_Controller
 {
 	public function a()
 	{
+		$privateKey = $this->config->item('private_key');
 		// include file koneksi database
 		$db = $this->load->database();
 
@@ -15,7 +16,7 @@ class Callback extends CI_Controller
 		$callbackSignature = isset($_SERVER['HTTP_X_CALLBACK_SIGNATURE']) ? $_SERVER['HTTP_X_CALLBACK_SIGNATURE'] : '';
 
 		// generate signature untuk dicocokkan dengan X-Callback-Signature
-		$signature = hash_hmac('sha256', $json, 'kJaqf-bQV3Z-G6ssJ-O23dh-KD9QB');
+		$signature = hash_hmac('sha256', $json, $privateKey);
 
 		// validasi signature
 		if ($callbackSignature !== $signature) {
@@ -61,6 +62,39 @@ class Callback extends CI_Controller
 				// $this->email->subject('Terima Kasih Kami Ucapkan');
 				// $this->email->message($mesg);
 				// $this->email->send();
+			}
+			if ($data->status == 'REFUND') {
+				// pembayaran sukses, lanjutkan proses sesuai sistem Anda, contoh:
+				$array = array(
+					'status' => $data->status,
+					'paid_at' => $data->paid_at
+				);
+				$this->db->set($array);
+				$this->db->where('inv', $data->merchant_ref);
+				// $this->db->where('status', "UNPAID");
+				$this->db->update('transaksi');
+			}
+			if ($data->status == 'EXPIRED') {
+				// pembayaran sukses, lanjutkan proses sesuai sistem Anda, contoh:
+				$array = array(
+					'status' => $data->status,
+					'paid_at' => $data->paid_at
+				);
+				$this->db->set($array);
+				$this->db->where('inv', $data->merchant_ref);
+				$this->db->where('status', "UNPAID");
+				$this->db->update('transaksi');
+			}
+			if ($data->status == 'FAILED') {
+				// pembayaran sukses, lanjutkan proses sesuai sistem Anda, contoh:
+				$array = array(
+					'status' => $data->status,
+					'paid_at' => $data->paid_at
+				);
+				$this->db->set($array);
+				$this->db->where('inv', $data->merchant_ref);
+				// $this->db->where('status', "UNPAID");
+				$this->db->update('transaksi');
 			}
 		}
 
