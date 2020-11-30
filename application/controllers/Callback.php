@@ -38,30 +38,51 @@ class Callback extends CI_Controller
 				$this->db->where('status', "UNPAID");
 				$this->db->update('transaksi');
 
-				// $email['transaksi'] = $this->db->get_where('transaksi', ['inv' => $data->merchant_ref])->result();
-				// $mail = $this->db->select('(SELECT transaksi.email FROM transaksi WHERE transaksi.inv = $data->merchant_ref)', FALSE);
+				$apiKey = $this->config->item('api_key');
 
-				// $config['charset'] = 'utf-8';
-				// $config['smtp_crypto'] = $this->config->item('smtp_crypto');
-				// $config['protocol'] = 'smtp';
-				// $config['mailtype'] = 'html';
-				// $config['smtp_host'] = $this->config->item('host_mail');
-				// $config['smtp_port'] = $this->config->item('port_mail');
-				// $config['smtp_timeout'] = '5';
-				// $config['smtp_user'] = $this->config->item('mail_account');
-				// $config['smtp_pass'] = $this->config->item('pass_mail');
-				// $config['crlf'] = "\r\n";
-				// $config['newline'] = "\r\n";
-				// $config['wordwrap'] = TRUE;
+				$curl = curl_init();
 
-				// $mesg = $this->load->view('email/notif.php', $email, TRUE);
-				// $this->load->library('email', $config);
+				curl_setopt_array($curl, array(
+					CURLOPT_FRESH_CONNECT     => true,
+					CURLOPT_URL               => $this->config->item('url_tripay') . "transaction/detail?reference=" . $data->reference,
+					CURLOPT_RETURNTRANSFER    => true,
+					CURLOPT_HEADER            => false,
+					CURLOPT_HTTPHEADER        => array(
+						"Authorization: Bearer " . $apiKey
+					),
+					CURLOPT_FAILONERROR       => false,
+					CURLOPT_POST              => false,
+				));
+	
+				$response = curl_exec($curl);
+				$err = curl_error($curl);
+	
+				curl_close($curl);
+				$detail = json_decode($response);
+	
+				$eml['json'] = $json;
 
-				// $this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
-				// $this->email->to($data->customer_email, $this->config->item('mail_account'));
-				// $this->email->subject('Terima Kasih Kami Ucapkan');
-				// $this->email->message($mesg);
-				// $this->email->send();
+				$config['charset'] = 'utf-8';
+				$config['smtp_crypto'] = $this->config->item('smtp_crypto');
+				$config['protocol'] = 'smtp';
+				$config['mailtype'] = 'html';
+				$config['smtp_host'] = $this->config->item('host_mail');
+				$config['smtp_port'] = $this->config->item('port_mail');
+				$config['smtp_timeout'] = '5';
+				$config['smtp_user'] = $this->config->item('mail_account');
+				$config['smtp_pass'] = $this->config->item('pass_mail');
+				$config['crlf'] = "\r\n";
+				$config['newline'] = "\r\n";
+				$config['wordwrap'] = TRUE;
+
+				$mesg = $this->load->view('email/notif.php', $eml, TRUE);
+				$this->load->library('email', $config);
+
+				$this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
+				$this->email->to($detail->data->customer_email, $this->config->item('mail_account'));
+				$this->email->subject('Terima Kasih Kami Ucapkan');
+				$this->email->message($mesg);
+				$this->email->send();
 			}
 			if ($data->status == 'REFUND') {
 				// pembayaran sukses, lanjutkan proses sesuai sistem Anda, contoh:
