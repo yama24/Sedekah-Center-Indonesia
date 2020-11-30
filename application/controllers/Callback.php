@@ -75,7 +75,7 @@ class Callback extends CI_Controller
 				$config['newline'] = "\r\n";
 				$config['wordwrap'] = TRUE;
 
-				$mesg = $this->load->view('email/notif.php', $eml, TRUE);
+				$mesg = $this->load->view('email/pembayaran_berhasil.php', $eml, TRUE);
 				$this->load->library('email', $config);
 
 				$this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
