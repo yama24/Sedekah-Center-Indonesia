@@ -14,6 +14,7 @@
 </div>
 <!-- ./wrapper -->
 
+<script src="<?php echo base_url() ?>assets/plugins/chart.js/Chart.min.js"></script>
 <!-- jQuery -->
 <script src="<?php echo base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -61,29 +62,6 @@
 		})
 	});
 </script>
-<?php foreach ($get_basis as $b) { ?>
-<script>
-	$(document).ready(function() {
-		$("#provinsi<?php echo $b->basisId?>").change(function() {
-			var url = "<?php echo site_url('dashboard/add_ajax_kab'); ?>/" + $(this).val();
-			$('#kabupaten<?php echo $b->basisId?>').load(url);
-			return false;
-		})
-
-		$("#kabupaten<?php echo $b->basisId?>").change(function() {
-			var url = "<?php echo site_url('dashboard/add_ajax_kec'); ?>/" + $(this).val();
-			$('#kecamatan<?php echo $b->basisId?>').load(url);
-			return false;
-		})
-
-		$("#kecamatan<?php echo $b->basisId?>").change(function() {
-			var url = "<?php echo site_url('dashboard/add_ajax_des'); ?>/" + $(this).val();
-			$('#desa<?php echo $b->basisId?>').load(url);
-			return false;
-		})
-	});
-</script>
-<?php } ?>
 
 <script>
 	$(function() {
@@ -108,6 +86,84 @@
 	$(function() {
 		// Summernote
 		$('#editor').summernote()
+	})
+</script>
+<script>
+	$(function() {
+		'use strict'
+
+		var ticksStyle = {
+			fontColor: '#495057',
+			fontStyle: 'bold'
+		}
+
+		var mode = 'index'
+		var intersect = true
+
+		var $salesChart = $('#sales-chart')
+		var salesChart = new Chart($salesChart, {
+			type: 'bar',
+			data: {
+				labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+				datasets: [
+					{
+						backgroundColor: '#FFC107',
+						borderColor: '#FFC107',
+						data: [<?= count($jan1) ?>, <?= count($feb1) ?>, <?= count($mar1) ?>, <?= count($apr1) ?>, <?= count($mei1) ?>, <?= count($jun1) ?>, <?= count($jul1) ?>, <?= count($agu1) ?>, <?= count($sep1) ?>, <?= count($okt1) ?>, <?= count($nov1) ?>, <?= count($des1) ?>]
+					},
+					{
+						backgroundColor: '#28A745',
+						borderColor: '#28A745',
+						data: [<?= count($jan2) ?>, <?= count($feb2) ?>, <?= count($mar2) ?>, <?= count($apr2) ?>, <?= count($mei2) ?>, <?= count($jun2) ?>, <?= count($jul2) ?>, <?= count($agu2) ?>, <?= count($sep2) ?>, <?= count($okt2) ?>, <?= count($nov2) ?>, <?= count($des2) ?>]
+					}
+				]
+			},
+			options: {
+				maintainAspectRatio: false,
+				tooltips: {
+					mode: mode,
+					intersect: intersect
+				},
+				hover: {
+					mode: mode,
+					intersect: intersect
+				},
+				legend: {
+					display: false
+				},
+				scales: {
+					yAxes: [{
+						// display: false,
+						gridLines: {
+							display: true,
+							// lineWidth: '4px',
+							color: 'rgba(0, 0, 0, .2)',
+							// zeroLineColor: 'transparent'
+						},
+						ticks: $.extend({
+							beginAtZero: true,
+
+							// Include a dollar sign in the ticks
+							callback: function(value, index, values) {
+								if (value >= 1000) {
+									value /= 1000
+									value += 'k'
+								}
+								return value
+							}
+						}, ticksStyle)
+					}],
+					xAxes: [{
+						display: true,
+						gridLines: {
+							display: false
+						},
+						ticks: ticksStyle
+					}]
+				}
+			}
+		})
+
 	})
 </script>
 </body>

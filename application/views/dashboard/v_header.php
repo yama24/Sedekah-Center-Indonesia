@@ -8,7 +8,7 @@ $user = $this->db->query("select * from pengguna where pengguna_id='$id_user'")-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Database | Dashboard</title>
+	<title><?php echo $this->config->item('app_name') ?> | <?php echo $page?></title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -85,7 +85,7 @@ $user = $this->db->query("select * from pengguna where pengguna_id='$id_user'")-
 			<!-- Brand Logo -->
 			<a href="<?php echo base_url() . 'dashboard' ?>" class="brand-link">
 				<img src="../../assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">Database</span>
+				<span class="brand-text font-weight-light"><?php echo $this->config->item('app_name') ?></span>
 			</a>
 
 			<!-- Sidebar -->
@@ -105,7 +105,9 @@ $user = $this->db->query("select * from pengguna where pengguna_id='$id_user'")-
 					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 						<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
 						<li class="nav-item">
-							<a href="<?php echo base_url() . 'dashboard' ?>" class="nav-link">
+							<a href="<?php echo base_url() . 'dashboard' ?>" class="nav-link <?php if ($page == "Dashboard") {
+								echo "active";
+							}?>">
 								<i class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
 									Dashboard
@@ -113,27 +115,37 @@ $user = $this->db->query("select * from pengguna where pengguna_id='$id_user'")-
 							</a>
 						</li>
 						<li class="nav-header">CONTENT</li>
-						<?php
-						//cek jika yang login adalah admin
-						if ($this->session->userdata('level') == "admin") {
-						?>
-							<li class="nav-item">
-								<a href="<?php echo base_url() . 'dashboard/pekerjaan' ?>" class="nav-link">
-									<i class="nav-icon fas fa-user-tie"></i>
-									<p>
-										Pekerjaan
-									</p>
-								</a>
-							</li>
-						<?php } ?>
+						<!-- //cek jika yang login adalah admin -->
 						<li class="nav-item">
-							<a href="<?php echo base_url() . 'dashboard/links' ?>" class="nav-link">
+							<a href="<?php echo base_url() . 'dashboard/transaksi' ?>" class="nav-link <?php if ($page == "Transaksi") {
+								echo "active";
+							}?>">
+								<i class="nav-icon fas fa-database"></i>
+								<p>
+									Transaksi
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?php echo base_url() . 'dashboard/setting' ?>" class="nav-link <?php if ($page == "Setting") {
+								echo "active";
+							}?>">
+								<i class="nav-icon fas fa-cogs"></i>
+								<p>
+									Setting
+								</p>
+							</a>
+						</li>
+						<!-- <li class="nav-item">
+							<a href="<?php echo base_url() . 'dashboard/links' ?>" class="nav-link <?php if ($page == "Link") {
+								echo "active";
+							}?>">
 								<i class="nav-icon fas fa-link"></i>
 								<p>
 									Link
 								</p>
 							</a>
-						</li>
+						</li> -->
 						<!-- <li class="nav-item has-treeview">
 							<a href="#" class="nav-link">
 								<i class="nav-icon fas fa-user"></i>
