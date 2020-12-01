@@ -630,5 +630,45 @@ class M_data extends CI_Model
 		return $this->db->get();
 	}
 
+	public function uploadbanner()
+	{
+		$config['upload_path'] = './assets/dist/img/banner/';
+		$config['allowed_types'] = 'jpg|png|jpeg|image/png|image/jpg|image/jpeg';
+		$config['max_size'] = '2048';
+		$config['file_name'] = round(microtime(true) * 1000);
+
+		$this->load->library('upload', $config);
+		if ($this->upload->do_upload('img')) {
+			$return = array('result' => 'success', 'file' => $this->upload->data(), 'error' => '');
+			return $return;
+		} else {
+			$return = array('result' => 'failed', 'file' => '', 'error' => $this->upload->display_errors());
+			return $return;
+		}
+	}
+	public function insertbanner($upload)
+	{
+		$img = $upload['file']['file_name'];
+		// $url = $this->input->post('url', true);
+		// $info = getimagesize(base_url() . 'assets/dist/img/banner/' . $img);
+		// if($info[0] != 1770 || $info[1] != 702){
+		//   unlink("./assets/images/banner/$img");
+		//   return false;
+		// }else{
+		// if ($url == "") {
+		// 	$FixUrl = "#";
+		// } else {
+		// 	$FixUrl = $url;
+		// }
+		$data = [
+			'nama' => $img,
+			// 'url' => $FixUrl
+		];
+		$this->db->insert('banner', $data);
+		return true;
+		// }
+	}
+
+
 	// AKHIR FUNGSI CRUD
 }

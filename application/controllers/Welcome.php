@@ -49,6 +49,7 @@ class Welcome extends CI_Controller
 
 		// curl_close($curl);
 		// $data['tripay'] = json_decode($response);
+		$data['banner'] = $this->m_data->get_data('banner')->result_array();
 		$data['setting'] = $this->m_data->get_data('setting')->row_array();
 		$data['tripay'] = $this->m_data->get_data('metode_pembayaran')->result();
 

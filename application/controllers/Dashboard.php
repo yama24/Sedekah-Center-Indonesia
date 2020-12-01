@@ -20,7 +20,7 @@ class Dashboard extends CI_Controller
 		$data['uang'] = $this->m_data->getTotal()->row_array();
 		$data['fee'] = $this->m_data->getFee()->row_array();
 		$data['avg'] = $this->m_data->getAvg()->row_array();
-		$data['berhasil'] = $this->db->get_where('transaksi', ['status' =>"PAID"])->result();
+		$data['berhasil'] = $this->db->get_where('transaksi', ['status' => "PAID"])->result();
 		$tgl['jan1'] = $this->m_data->jan1()->result();
 		$tgl['feb1'] = $this->m_data->feb1()->result();
 		$tgl['mar1'] = $this->m_data->mar1()->result();
@@ -100,7 +100,8 @@ class Dashboard extends CI_Controller
 	}
 	public function setting()
 	{
-		$data['transaksi'] = $this->m_data->get_data('transaksi')->result();
+		$data['setting'] = $this->m_data->get_data('setting')->row_array();
+		$data['banner'] = $this->m_data->get_data('banner')->result();
 		$data['page'] = "Setting";
 		if ($this->session->userdata('level') == "admin") {
 			$this->load->view('dashboard/v_header', $data);
@@ -110,6 +111,64 @@ class Dashboard extends CI_Controller
 			redirect(base_url('dashboard'));
 		}
 	}
+	public function switchbanner()
+	{
+		$id = $this->input->post('id');;
+		$aktif = $this->input->post('aktif');
+		$where = array(
+			'id' => $id
+		);
+		$data = array(
+			'banner' => $aktif
+		);
+		$this->m_data->update_data($where, $data, 'setting');
+		redirect(base_url() . 'dashboard/setting');
+	}
+	public function addbanner()
+	{
+		$upload = $this->m_data->uploadbanner();
+		if ($upload['result'] == 'success') {
+			$insert = $this->m_data->insertbanner($upload);
+			if ($insert) {
+				redirect(base_url() . 'dashboard/setting?alert=success');
+			} else {
+				redirect(base_url() . 'dashboard/setting?alert=failed');
+			}
+		} else {
+			redirect(base_url() . 'dashboard/setting?alert=fail');
+		}
+	}
+	public function delbanner($id)
+	{
+		$get = $this->db->get_where('banner', ['id' => $id])->row_array();
+		unlink("./assets/dist/img/banner/" . $get['nama']);
+		$where = array(
+			'id' => $id
+		);
+		$this->m_data->delete_data($where, 'banner');
+		redirect(base_url() . 'dashboard/setting?alert=deleted');
+	}
+	public function editbanner($id)
+	{
+		$get = $this->db->get_where('banner', ['id' => $id])->row_array();
+		unlink("./assets/dist/img/banner/" . $get['nama']);
+		$upload = $this->m_data->uploadbanner();
+		if ($upload['result'] == 'success') {
+			$img = $upload['file']['file_name'];
+			$where = array(
+				'id' => $id
+			);
+			$data = [
+				'nama' => $img,
+				// 'url' => $FixUrl
+			];
+			$this->m_data->update_data($where, $data, 'banner');
+			redirect(base_url() . 'dashboard/setting?alert=success');
+		} else {
+			redirect(base_url() . 'dashboard/setting?alert=fail');
+		}
+	}
+
 	public function keluar()
 	{
 		$this->session->sess_destroy();
