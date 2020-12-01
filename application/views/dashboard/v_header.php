@@ -53,14 +53,14 @@ $user = $this->db->query("select * from pengguna where pengguna_id='$id_user'")-
 						<b style="text-transform: capitalize;"><?php echo $user->pengguna_level ?></b>
 					</a>
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<div class="dropdown-item">
+						<div class="dropdown-item bg-secondary">
 							<center><img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" width="80"></center>
 						</div>
-						<div class="dropdown-item">
+						<div class="dropdown-item bg-secondary">
 							<center style="text-transform: capitalize;"><?php echo $user->pengguna_nama ?></center>
 							<center><small><?php echo $user->pengguna_email ?></small></center>
 						</div>
-						<div class="dropdown-divider"></div>
+						<!-- <div class="dropdown-divider"></div> -->
 						<div class="row" style="margin: 10px;">
 							<div class="col-lg-6 col-6">
 								<a href="<?php echo base_url() . 'dashboard/profil' ?>" class="btn btn-block btn-outline-info btn-sm pull">Profile</a>

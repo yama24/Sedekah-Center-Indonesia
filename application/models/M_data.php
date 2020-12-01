@@ -341,7 +341,294 @@ class M_data extends CI_Model
 	// 	$this->db->where('json.inv', $slug);
 	// 	return $this->db->get()->row_array();
 	// }
-
+	public function jan11()
+	{
+		$month = 1;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function feb11()
+	{
+		$month = 2;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function mar11()
+	{
+		$month = 3;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function apr11()
+	{
+		$month = 4;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function mei11()
+	{
+		$month = 5;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function jun11()
+	{
+		$month = 6;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function jul11()
+	{
+		$month = 7;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function agu11()
+	{
+		$month = 8;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function sep11()
+	{
+		$month = 9;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function okt11()
+	{
+		$month = 10;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function nov11()
+	{
+		$month = 11;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function des11()
+	{
+		$month = 12;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('jumlah');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function jan22()
+	{
+		$month = 1;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function feb22()
+	{
+		$month = 2;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function mar22()
+	{
+		$month = 3;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function apr22()
+	{
+		$month = 4;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function mei22()
+	{
+		$month = 5;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function jun22()
+	{
+		$month = 6;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function jul22()
+	{
+		$month = 7;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function agu22()
+	{
+		$month = 8;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function sep22()
+	{
+		$month = 9;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function okt22()
+	{
+		$month = 10;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function nov22()
+	{
+		$month = 11;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
+	public function des22()
+	{
+		$month = 12;
+		$year = date('Y');
+		$status = "PAID";
+		$this->db->select_sum('diterima');
+		$this->db->where('status', $status);
+		$this->db->where('input_month', $month);
+		$this->db->where('input_year', $year);
+		$this->db->from('transaksi');
+		return $this->db->get();
+	}
 
 	// AKHIR FUNGSI CRUD
 }

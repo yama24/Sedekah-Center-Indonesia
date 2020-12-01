@@ -52,6 +52,31 @@ class Dashboard extends CI_Controller
 		// $data['regencies'] = $this->m_data->get_data('regencies')->result();
 		// $data['districts'] = $this->m_data->get_data('districts')->result();
 		// $data['villages'] = $this->m_data->get_data('villages')->result();
+		$tgl['jan11'] = $this->m_data->jan11()->row_array();
+		$tgl['feb11'] = $this->m_data->feb11()->row_array();
+		$tgl['mar11'] = $this->m_data->mar11()->row_array();
+		$tgl['apr11'] = $this->m_data->apr11()->row_array();
+		$tgl['mei11'] = $this->m_data->mei11()->row_array();
+		$tgl['jun11'] = $this->m_data->jun11()->row_array();
+		$tgl['jul11'] = $this->m_data->jul11()->row_array();
+		$tgl['agu11'] = $this->m_data->agu11()->row_array();
+		$tgl['sep11'] = $this->m_data->sep11()->row_array();
+		$tgl['okt11'] = $this->m_data->okt11()->row_array();
+		$tgl['nov11'] = $this->m_data->nov11()->row_array();
+		$tgl['des11'] = $this->m_data->des11()->row_array();
+		$tgl['jan22'] = $this->m_data->jan22()->row_array();
+		$tgl['feb22'] = $this->m_data->feb22()->row_array();
+		$tgl['mar22'] = $this->m_data->mar22()->row_array();
+		$tgl['apr22'] = $this->m_data->apr22()->row_array();
+		$tgl['mei22'] = $this->m_data->mei22()->row_array();
+		$tgl['jun22'] = $this->m_data->jun22()->row_array();
+		$tgl['jul22'] = $this->m_data->jul22()->row_array();
+		$tgl['agu22'] = $this->m_data->agu22()->row_array();
+		$tgl['sep22'] = $this->m_data->sep22()->row_array();
+		$tgl['okt22'] = $this->m_data->okt22()->row_array();
+		$tgl['nov22'] = $this->m_data->nov22()->row_array();
+		$tgl['des22'] = $this->m_data->des22()->row_array();
+
 		$data['page'] = "Dashboard";
 		if ($this->session->userdata('level') == "admin") {
 			$this->load->view('dashboard/v_header', $data);

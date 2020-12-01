@@ -105,8 +105,7 @@
 			type: 'bar',
 			data: {
 				labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-				datasets: [
-					{
+				datasets: [{
 						backgroundColor: '#FFC107',
 						borderColor: '#FFC107',
 						data: [<?= count($jan1) ?>, <?= count($feb1) ?>, <?= count($mar1) ?>, <?= count($apr1) ?>, <?= count($mei1) ?>, <?= count($jun1) ?>, <?= count($jul1) ?>, <?= count($agu1) ?>, <?= count($sep1) ?>, <?= count($okt1) ?>, <?= count($nov1) ?>, <?= count($des1) ?>]
@@ -163,7 +162,78 @@
 				}
 			}
 		})
-
+		var $visitorsChart = $('#visitors-chart')
+		var visitorsChart = new Chart($visitorsChart, {
+			data: {
+				labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+				datasets: [{
+						type: 'line',
+						data: [<?= floatval($jan11['jumlah']) ?>, <?= floatval($feb11['jumlah']) ?>, <?= floatval($mar11['jumlah']) ?>, <?= floatval($apr11['jumlah']) ?>, <?= floatval($mei11['jumlah']) ?>, <?= floatval($jun11['jumlah']) ?>, <?= floatval($jul11['jumlah']) ?>, <?= floatval($agu11['jumlah']) ?>, <?= floatval($sep11['jumlah']) ?>, <?= floatval($okt11['jumlah']) ?>, <?= floatval($nov11['jumlah']) ?>, <?= floatval($des11['jumlah']) ?>],
+						backgroundColor: 'transparent',
+						borderColor: '#DC3545',
+						pointBorderColor: '#DC3545',
+						pointBackgroundColor: '#DC3545',
+						fill: false
+						// pointHoverBackgroundColor: '#007bff',
+						// pointHoverBorderColor    : '#007bff'
+					},
+					{
+						type: 'line',
+						data: [<?= floatval($jan22['diterima']) ?>, <?= floatval($feb22['diterima']) ?>, <?= floatval($mar22['diterima']) ?>, <?= floatval($apr22['diterima']) ?>, <?= floatval($mei22['diterima']) ?>, <?= floatval($jun22['diterima']) ?>, <?= floatval($jul22['diterima']) ?>, <?= floatval($agu22['diterima']) ?>, <?= floatval($sep22['diterima']) ?>, <?= floatval($okt22['diterima']) ?>, <?= floatval($nov22['diterima']) ?>, <?= floatval($des22['diterima']) ?>],
+						backgroundColor: 'tansparent',
+						borderColor: '#007BFF',
+						pointBorderColor: '#007BFF',
+						pointBackgroundColor: '#007BFF',
+						fill: false
+						// pointHoverBackgroundColor: '#ced4da',
+						// pointHoverBorderColor    : '#ced4da'
+					}
+				]
+			},
+			options: {
+				maintainAspectRatio: false,
+				tooltips: {
+					mode: mode,
+					intersect: intersect
+				},
+				hover: {
+					mode: mode,
+					intersect: intersect,
+				},
+				legend: {
+					display: false
+				},
+				scales: {
+					yAxes: [{
+						// display: false,
+						gridLines: {
+							display: true,
+							// lineWidth: '4px',
+							color: 'rgba(0, 0, 0, .2)',
+							// zeroLineColor: 'transparent'
+						},
+						ticks: $.extend({
+							beginAtZero: true,
+							suggestedMax: 200,
+							callback: function(value, index, values) {
+								if (value >= 1000) {
+									value /= 1000
+									value += 'k'
+								}
+								return 'Rp. ' + value
+							}
+						}, ticksStyle)
+					}],
+					xAxes: [{
+						display: true,
+						gridLines: {
+							display: false
+						},
+						ticks: ticksStyle
+					}]
+				}
+			}
+		})
 	})
 </script>
 </body>

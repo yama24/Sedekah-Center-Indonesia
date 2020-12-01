@@ -68,7 +68,6 @@
 							<div class="small-box bg-danger">
 								<div class="inner">
 									<h3>Rp. <?php echo number_format($avg['jumlah'], 1, ',', '.') ?></h3>
-
 									<p>Data Rata-rata Donasi</p>
 								</div>
 								<div class="icon">
@@ -80,44 +79,100 @@
 						<!-- ./col -->
 					</div>
 					<!-- /.row -->
-					<div class="card">
-						<div class="card-header border-0">
-							<div class="d-flex justify-content-between">
-								<h3 class="card-title">Data Transaksi <?php echo date('Y')?></h3>
-								<!-- <a href="javascript:void(0);">View Report</a> -->
+					<!-- <div class="row">
+						<div class="col-lg-6">
+							<div class="card card-outline card-success">
+								<div class="card-header border-0">
+									<div class="d-flex justify-content-between">
+										<h3 class="card-title">Data Transaksi <?php echo date('M') ?></h3>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="position-relative mb-4">
+										<canvas id="sales-chart-month" height="200"></canvas>
+									</div>
+									<div class="d-flex flex-row justify-content-end">
+										<span class="mr-2">
+											<i class="fas fa-square text-warning"></i> Transaksi Belum Berhasil
+										</span>
+										<span>
+											<i class="fas fa-square text-success"></i> Transaksi Berhasil
+										</span>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="card-body">
-							<!-- <div class="d-flex">
-								<p class="d-flex flex-column">
-									<span class="text-bold text-lg"><?php echo count($transaksi) ?></span>
-									<span>Data Total</span>
-								</p>
-								<p class="ml-auto d-flex flex-column text-right">
-									<span class="text-success">
-										<i class="fas fa-arrow-up"></i> 33.1%
-									</span>
-									<span class="text-muted">Since last month</span>
-								</p>
-							</div> -->
-							<!-- /.d-flex -->
-
-							<div class="position-relative mb-4">
-								<canvas id="sales-chart" height="200"></canvas>
+						<div class="col-lg-6">
+							<div class="card card-outline card-info">
+								<div class="card-header border-0">
+									<div class="d-flex justify-content-between">
+										<h3 class="card-title">Data Nominal Donasi <?php echo date('M') ?></h3>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="position-relative mb-4">
+										<canvas id="visitors-chart-month" height="200"></canvas>
+									</div>
+									<div class="d-flex flex-row justify-content-end">
+										<span class="mr-2">
+											<i class="fas fa-square text-danger"></i> Total Donasi Berhasil
+										</span>
+										<span>
+											<i class="fas fa-square text-primary"></i> Total Diterima
+										</span>
+									</div>
+								</div>
 							</div>
-
-							<div class="d-flex flex-row justify-content-end">
-								<span class="mr-2">
-									<i class="fas fa-square text-warning"></i> Transaksi Belum Berhasil
-								</span>
-
-								<span>
-									<i class="fas fa-square text-success"></i> Transaksi Berhasil
-								</span>
+						</div>
+					</div> -->
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="card card-outline card-success">
+								<div class="card-header border-0">
+									<div class="d-flex justify-content-between">
+										<h3 class="card-title">Data Transaksi <?php echo date('Y') ?></h3>
+										<!-- <a href="javascript:void(0);">View Report</a> -->
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="position-relative mb-4">
+										<canvas id="sales-chart" height="200"></canvas>
+									</div>
+									<div class="d-flex flex-row justify-content-end">
+										<span class="mr-2">
+											<i class="fas fa-square text-warning"></i> Transaksi Belum Berhasil
+										</span>
+										<span>
+											<i class="fas fa-square text-success"></i> Transaksi Berhasil
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="card card-outline card-info">
+								<div class="card-header border-0">
+									<div class="d-flex justify-content-between">
+										<h3 class="card-title">Data Nominal Donasi <?php echo date('Y') ?></h3>
+										<!-- <a href="javascript:void(0);">View Report</a> -->
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="position-relative mb-4">
+										<canvas id="visitors-chart" height="200"></canvas>
+									</div>
+									<div class="d-flex flex-row justify-content-end">
+										<span class="mr-2">
+											<i class="fas fa-square text-danger"></i> Total Donasi Berhasil
+										</span>
+										<span>
+											<i class="fas fa-square text-primary"></i> Total Diterima
+										</span>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</section>
 			<!-- /.content -->
