@@ -41,31 +41,31 @@
 							<!-- banner -->
 							<?php if ($setting['banner'] == 1) { ?>
 								<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-									<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-								</ol>
-								<div class="carousel-inner">
-									<div class="carousel-item active">
-										<img class="d-block w-100" src="<?php echo base_url() ?>assets/dist/img/banner/1.png" alt="First slide">
+									<ol class="carousel-indicators">
+										<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+										<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+										<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+									</ol>
+									<div class="carousel-inner">
+										<div class="carousel-item active">
+											<img class="d-block w-100" src="<?php echo base_url() ?>assets/dist/img/banner/1.png" alt="First slide">
+										</div>
+										<div class="carousel-item">
+											<img class="d-block w-100" src="<?php echo base_url() ?>assets/dist/img/banner/2.png" alt="Second slide">
+										</div>
+										<div class="carousel-item">
+											<img class="d-block w-100" src="<?php echo base_url() ?>assets/dist/img/banner/3.png" alt="Third slide">
+										</div>
 									</div>
-									<div class="carousel-item">
-										<img class="d-block w-100" src="<?php echo base_url() ?>assets/dist/img/banner/2.png" alt="Second slide">
-									</div>
-									<div class="carousel-item">
-										<img class="d-block w-100" src="<?php echo base_url() ?>assets/dist/img/banner/3.png" alt="Third slide">
-									</div>
+									<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+									<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a>
 								</div>
-								<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-									<span class="sr-only">Previous</span>
-								</a>
-								<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-									<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									<span class="sr-only">Next</span>
-								</a>
-							</div>
 							<?php } ?>
 							<!-- end banner -->
 							<div class="card-header" style="background-color: #C82333;">
@@ -122,21 +122,31 @@
 											</div>
 										</div>
 									</div>
+									<style>
+										.myDiv {
+											display: none;
+											text-align: center;
+										}
+
+										.myDiv img {
+											margin: 0 auto;
+										}
+									</style>
 									<label>Metode pembayaran</label>
 									<div class="input-group mb-3">
-										<div class="form-group">
-											<div class="row">
-												<?php foreach ($tripay as $tp) {  ?>
-													<div class="col-md-3">
-														<div class="custom-control custom-radio">
-															<input class="custom-control-input" type="radio" id="<?php echo $tp->code ?>" name="metode" value="<?php echo $tp->code ?>">
-															<label for="<?php echo $tp->code ?>" class="custom-control-label" value><img class="img-fluid" src="<?php echo base_url() ?>assets/dist/img/pay/<?php echo $tp->code ?>.png" alt=""><br>(<?php echo $tp->name ?>)<br><br></label>
-														</div>
-													</div>
-												<?php } ?>
-											</div>
-										</div>
+										<select name="metode" id="metode" class="form-control select2bs4">
+											<option value="">- Pilih metode pembayaran</option>
+											<?php foreach ($tripay as $tp) {  ?>
+												<option value="<?php echo $tp->code ?>"><?php echo $tp->name ?></option>
+											<?php } ?>
+										</select>
 									</div>
+									<?php foreach ($tripay as $tp) {  ?>
+										<div id="show<?php echo $tp->code ?>" class="myDiv">
+											<img src="<?php echo base_url() ?>assets/dist/img/pay/<?php echo $tp->code ?>.png" width="200px" alt="" class="" />
+										</div>
+									<?php } ?>
+									<br>
 									<button class="btn btn-block btn-danger" type="submit">Submit</button>
 								</form>
 
@@ -172,23 +182,11 @@
 	</script>
 	<script>
 		$(document).ready(function() {
-			$("#provinsi").change(function() {
-				var url = "<?php echo site_url('welcome/add_ajax_kab'); ?>/" + $(this).val();
-				$('#kabupaten').load(url);
-				return false;
-			})
-
-			$("#kabupaten").change(function() {
-				var url = "<?php echo site_url('welcome/add_ajax_kec'); ?>/" + $(this).val();
-				$('#kecamatan').load(url);
-				return false;
-			})
-
-			$("#kecamatan").change(function() {
-				var url = "<?php echo site_url('welcome/add_ajax_des'); ?>/" + $(this).val();
-				$('#desa').load(url);
-				return false;
-			})
+			$('#metode').on('change', function() {
+				var demovalue = $(this).val();
+				$("div.myDiv").hide();
+				$("#show" + demovalue).show();
+			});
 		});
 	</script>
 </body>
