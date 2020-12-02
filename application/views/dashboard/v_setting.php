@@ -19,7 +19,11 @@
 			<!-- Main content -->
 			<section class="content">
 				<div class="container-fluid">
-					<div class="card card-outline card-primary">
+					<div class="card card-outline card-<?php if ($setting['banner'] == 0) {
+						echo "danger";
+					} else {
+						echo "primary";
+					} ?>">
 						<div class="card-header">
 							<h3 class="card-title">Aktivasi Banner</h3>
 							<!-- <a href="<?php echo base_url() . 'dashboard/export' ?>" style="float: left;" target="_blank" class="btn btn-outline-secondary">
@@ -32,14 +36,14 @@
 								<form action="<?php echo base_url('dashboard/switchbanner') ?>" method="post">
 									<input type="number" value="1" name="aktif" hidden>
 									<input type="number" value="1" name="id" hidden>
-									<button style="float: right;" class="btn btn-sm btn-outline-primary" type="submit">Aktifkan Banner</button>
+									<button style="float: right;" class="btn btn-outline-primary" type="submit">Aktifkan Banner</button>
 								</form>
 							<?php } ?>
 							<?php if ($setting['banner'] == 1) { ?>
 								<form action="<?php echo base_url('dashboard/switchbanner') ?>" method="post">
 									<input type="number" value="0" name="aktif" hidden>
 									<input type="number" value="1" name="id" hidden>
-									<button style="float: right;" class="btn btn-sm btn-outline-danger" type="submit">Nonaktifkan Banner</button>
+									<button style="float: right;" class="btn btn-outline-danger" type="submit">Nonaktifkan Banner</button>
 								</form>
 							<?php } ?>
 						</div>
@@ -61,7 +65,7 @@
 								<!-- <a href="<?php echo base_url() . 'dashboard/export' ?>" style="float: left;" target="_blank" class="btn btn-outline-secondary">
 								Export Kontak
 							</a> -->
-								<button data-toggle="modal" data-target="#modal-tambah-banner" style="float: right;" class="btn btn-outline-success">
+								<button data-toggle="modal" data-target="#modal-tambah-banner" style="float: right;" class="btn btn-outline-info">
 									Add Banner
 								</button>
 							</div>
