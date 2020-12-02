@@ -24,6 +24,28 @@
 	<!-- Select2 -->
 	<link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/select2/css/select2.min.css">
 	<link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+	<!-- Primary Meta Tags -->
+	<meta name="title" content="Donasi | SCI">
+	<meta name="description" content="Dari Ummat Untuk Ummat">
+	<meta name="keyword" content="">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="<?php echo base_url() ?>">
+	<meta property="og:title" content="Donasi | SCI">
+	<meta property="og:description" content="Dari Ummat Untuk Ummat">
+	<meta property="og:image" content="<?php echo base_url() ?>assets/dist/img/sci.png">
+	<meta property="og:keyword" content="">
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="<?php echo base_url() ?>">
+	<meta property="twitter:title" content="Donasi | SCI">
+	<meta property="twitter:description" content="Dari Ummat Untuk Ummat">
+	<meta property="twitter:image" content="<?php echo base_url() ?>assets/dist/img/sci.png">
+	<meta property="twitter:keyword" content="">
+
 	<style>
 		.myDiv {
 			display: none;
