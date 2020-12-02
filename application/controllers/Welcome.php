@@ -60,10 +60,13 @@ class Welcome extends CI_Controller
 	public function terimakasih($slug)
 	{
 		$data['json'] = $this->db->get_where('json', ['inv' => $slug])->row_array();
-		if ($this->session->userdata('inv') != $slug) {
+		if ($this->session->userdata('inv') == $slug) {
+			$this->load->view('frontend/v_link', $data);
+		} elseif ($this->session->userdata('level') == "admin") {
+			$this->load->view('frontend/v_link', $data);
+		} else {
 			redirect(base_url() . '404');
 		}
-		$this->load->view('frontend/v_link', $data);
 	}
 	public function form_submit()
 	{

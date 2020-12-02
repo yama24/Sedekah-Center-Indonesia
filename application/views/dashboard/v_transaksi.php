@@ -42,6 +42,7 @@
 										<th>Phone</th>
 										<th>Email</th>
 										<th>Jumlah</th>
+										<th>Fee</th>
 										<th>Diterima</th>
 										<th>Metode Pembayaran</th>
 										<th>Status</th>
@@ -62,10 +63,11 @@
 											<td><?php echo $t->phone; ?></td>
 											<td><?php echo $t->email; ?></td>
 											<td>Rp. <?php echo number_format($t->jumlah, 0, ",", "."); ?></td>
+											<td>Rp. <?php echo number_format($t->fee, 0, ",", "."); ?></td>
 											<td>Rp. <?php echo number_format($t->diterima, 0, ",", "."); ?></td>
 											<td><?php echo $t->nama_metode; ?></td>
 											<td><?php echo $t->status; ?></td>
-											<td><a href="<?php echo $t->checkout_url; ?>" target="_blank"><?php echo $t->checkout_url; ?></a></td>
+											<td><a href="<?php echo base_url('terimakasih/') . $t->inv; ?>" target="_blank"><?php echo base_url('terimakasih/') . $t->inv; ?></a></td>
 										</tr>
 									<?php } ?>
 								</tbody>
@@ -79,6 +81,7 @@
 										<th>Phone</th>
 										<th>Email</th>
 										<th>Jumlah</th>
+										<th>Fee</th>
 										<th>Diterima</th>
 										<th>Metode Pembayaran</th>
 										<th>Status</th>
