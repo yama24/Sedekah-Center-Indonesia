@@ -11,7 +11,8 @@ class Dashboard extends CI_Controller
 		// jika session status tidak sama dengan session telah_login, berarti pengguna belum login
 		// maka halaman akan di alihkan kembali ke halaman login.
 		if ($this->session->userdata('status') != "telah_login") {
-			redirect(base_url() . 'login?alert=belum_login');
+			$this->session->set_flashdata('message', '<div class="alert alert-info" role="alert">Anda harus login dulu!</div>');
+			redirect('login');
 		}
 	}
 	public function index()
@@ -83,7 +84,7 @@ class Dashboard extends CI_Controller
 			$this->load->view('dashboard/v_dashboard', $data);
 			$this->load->view('dashboard/v_footerv2', $tgl);
 		} else {
-			redirect(base_url('dashboard'));
+			redirect('dashboard');
 		}
 	}
 	public function transaksi()
@@ -95,7 +96,7 @@ class Dashboard extends CI_Controller
 			$this->load->view('dashboard/v_transaksi', $data);
 			$this->load->view('dashboard/v_footer');
 		} else {
-			redirect(base_url('dashboard'));
+			redirect('dashboard');
 		}
 	}
 	public function setting()
@@ -108,7 +109,7 @@ class Dashboard extends CI_Controller
 			$this->load->view('dashboard/v_setting', $data);
 			$this->load->view('dashboard/v_footer');
 		} else {
-			redirect(base_url('dashboard'));
+			redirect('dashboard');
 		}
 	}
 	public function switchbanner()
@@ -122,7 +123,7 @@ class Dashboard extends CI_Controller
 			'banner' => $aktif
 		);
 		$this->m_data->update_data($where, $data, 'setting');
-		redirect(base_url() . 'dashboard/setting');
+		redirect('dashboard/setting');
 	}
 	public function addbanner()
 	{
@@ -130,12 +131,15 @@ class Dashboard extends CI_Controller
 		if ($upload['result'] == 'success') {
 			$insert = $this->m_data->insertbanner($upload);
 			if ($insert) {
-				redirect(base_url() . 'dashboard/setting?alert=success');
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Banner berhasil ditambahkan!</div>');
+				redirect('dashboard/setting');
 			} else {
-				redirect(base_url() . 'dashboard/setting?alert=failed');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal menambah banner!</div>');
+				redirect('dashboard/setting');
 			}
 		} else {
-			redirect(base_url() . 'dashboard/setting?alert=fail');
+			$this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Gagal menambah banner, pastikan banner berukuran maksimal 2mb dan berformat png, jpg, jpeg.</div>');
+			redirect('dashboard/setting');
 		}
 	}
 	public function delbanner($id)
@@ -146,7 +150,9 @@ class Dashboard extends CI_Controller
 			'id' => $id
 		);
 		$this->m_data->delete_data($where, 'banner');
-		redirect(base_url() . 'dashboard/setting?alert=deleted');
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Banner berhasil dihapus!</div>');
+
+		redirect('dashboard/setting');
 	}
 	public function editbanner($id)
 	{
@@ -163,16 +169,27 @@ class Dashboard extends CI_Controller
 				// 'url' => $FixUrl
 			];
 			$this->m_data->update_data($where, $data, 'banner');
-			redirect(base_url() . 'dashboard/setting?alert=success');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Banner berhasil di edit!</div>');
+
+			redirect('dashboard/setting');
 		} else {
-			redirect(base_url() . 'dashboard/setting?alert=fail');
+			$this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Gagal menambah banner, pastikan banner berukuran maksimal 2mb dan berformat png, jpg, jpeg.</div>');
+
+			redirect('dashboard/setting');
 		}
 	}
 
 	public function keluar()
 	{
-		$this->session->sess_destroy();
-		redirect('login?alert=logout');
+		$this->session->unset_userdata('id');
+		$this->session->unset_userdata('username');
+		$this->session->unset_userdata('name');
+		$this->session->unset_userdata('email');
+		$this->session->unset_userdata('photo');
+		$this->session->unset_userdata('level');
+		$this->session->unset_userdata('status');
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda berhasil logout!</div>');
+		redirect('login');
 	}
 	public function ganti_password()
 	{
@@ -223,8 +240,9 @@ class Dashboard extends CI_Controller
 		$where = array(
 			'pengguna_id' => $id_pengguna
 		);
+		$data['page'] = "Profil";
 		$data['profil'] = $this->m_data->edit_data($where, 'pengguna')->result();
-		$this->load->view('dashboard/v_header');
+		$this->load->view('dashboard/v_header', $data);
 		$this->load->view('dashboard/v_profil', $data);
 		$this->load->view('dashboard/v_footer');
 	}
@@ -245,7 +263,9 @@ class Dashboard extends CI_Controller
 				'pengguna_email' => $email
 			);
 			$this->m_data->update_data($where, $data, 'pengguna');
-			redirect(base_url() . 'dashboard/profil/?alert=sukses');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil terlah di update!</div>');
+
+			redirect('dashboard/profil');
 		} else {
 			// id pengguna yang sedang login
 			$id_pengguna = $this->session->userdata('id');

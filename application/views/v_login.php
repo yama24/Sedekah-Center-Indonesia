@@ -27,17 +27,8 @@
 			<a href="<?php echo base_url() ?>assets/index2.html"><b>Data</b>Base</a>
 		</div>
 		<!-- /.login-logo -->
-		<?php
-		if (isset($_GET['alert'])) {
-			if ($_GET['alert'] == "gagal") {
-				echo "<div class='alert alert-danger font-weight-bold text-center'>Maaf! Username & Password Salah.</div>";
-			} else if ($_GET['alert'] == "belum_login") {
-				echo "<div class='alert alert-danger font-weight-bold text-center'>Anda Harus Login Terlebih Dulu!</div>";
-			} else if ($_GET['alert'] == "logout") {
-				echo "<div class='alert alert-success font-weight-bold text-center'>Anda Telah Logout!</div>";
-			}
-		}
-		?>
+		<?= $this->session->flashdata('message'); ?>
+
 		<div class="card">
 			<div class="card-body login-card-body">
 				<p class="login-box-msg">Sign in to start your session</p>
@@ -62,7 +53,7 @@
 					<div class="row">
 						<div class="col-8">
 							<div class="icheck-primary">
-							<a href="<?php echo base_url(); ?>">Kembali</a>
+								<a href="<?php echo base_url(); ?>">Kembali</a>
 							</div>
 						</div>
 						<!-- /.col -->

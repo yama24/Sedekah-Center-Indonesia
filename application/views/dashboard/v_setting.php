@@ -20,10 +20,10 @@
 			<section class="content">
 				<div class="container-fluid">
 					<div class="card card-outline card-<?php if ($setting['banner'] == 0) {
-						echo "danger";
-					} else {
-						echo "primary";
-					} ?>">
+															echo "danger";
+														} else {
+															echo "primary";
+														} ?>">
 						<div class="card-header">
 							<h3 class="card-title">Aktivasi Banner</h3>
 							<!-- <a href="<?php echo base_url() . 'dashboard/export' ?>" style="float: left;" target="_blank" class="btn btn-outline-secondary">
@@ -84,6 +84,9 @@
 									}
 								}
 								?>
+								<?= $this->session->flashdata('message'); ?>
+
+
 								<table id="example2" class="table table-bordered table-hover">
 									<thead>
 										<tr>

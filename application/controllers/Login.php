@@ -5,6 +5,9 @@ class Login extends CI_Controller
 {
 	public function index()
 	{
+		if ($this->session->userdata('email')) {
+			redirect('dashboard');
+		}
 		$this->load->view('v_login');
 	}
 	public function aksi()
@@ -39,9 +42,10 @@ class Login extends CI_Controller
 				);
 				$this->session->set_userdata($data_session);
 				// alihkan halaman ke halaman dashboard pengguna
-				redirect(base_url() . 'dashboard');
+				redirect('dashboard');
 			} else {
-				redirect(base_url() . 'login?alert=gagal');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username & pasword salah!</div>');
+				redirect('login');
 			}
 		} else {
 			$this->load->view('v_login');

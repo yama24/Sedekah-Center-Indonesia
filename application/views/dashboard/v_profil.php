@@ -28,13 +28,7 @@
 									<div class="card card-outline card-primary">
 										<div class="card-header">
 											<h3 class="card-title"></h3>
-											<?php
-											if (isset($_GET['alert'])) {
-												if ($_GET['alert'] == "sukses") {
-													echo "<div class='alert alert-success font-weight-bold text-center'>Profil telah diupdate!</div>";
-												}
-											}
-											?>
+											<?= $this->session->flashdata('message'); ?>
 										</div>
 										<!-- /.card-header -->
 										<!-- form start -->
