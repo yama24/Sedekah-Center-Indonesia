@@ -86,8 +86,8 @@ $db['default'] = array(
 	// 'database' => 'internus_sci',
 
 
-	'username' => 'root',
-	'password' => '',
+	'username' => 'server',
+	'password' => '1234',
 	'database' => 'sci',
 	
 	'dbdriver' => 'mysqli',

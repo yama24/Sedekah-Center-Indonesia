@@ -78,11 +78,11 @@ class Callback extends CI_Controller
 				$mesg = $this->load->view('email/pembayaran_berhasil.php', $eml, TRUE);
 				$this->load->library('email', $config);
 
-				$this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
-				$this->email->to($detail->data->customer_email, $this->config->item('mail_account'));
-				$this->email->subject('Pembayaran Berhasil');
-				$this->email->message($mesg);
-				$this->email->send();
+				// $this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
+				// $this->email->to($detail->data->customer_email, $this->config->item('mail_account'));
+				// $this->email->subject('Pembayaran Berhasil');
+				// $this->email->message($mesg);
+				// $this->email->send();
 			}
 			if ($data->status == 'REFUND') {
 				// pembayaran sukses, lanjutkan proses sesuai sistem Anda, contoh:

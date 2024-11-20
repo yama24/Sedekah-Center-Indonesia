@@ -13,13 +13,14 @@ $config['email_contact'] = 'blindonusantara@gmail.com';
 // $config['kode_merchant'] = 'T1198'; //produksi
 // $config['api_key'] = 'mwcsk1XakYpFS2PX6GzNAqYWdphYQ3FCtDOu7SPV'; //produksi
 // $config['private_key'] = '0q1ES-XrPzC-fSHts-VGcSS-yLEtg'; //produksi
-// $config['url_tripay'] = 'https://payment.tripay.co.id/api/'; //produksi
+// $config['url_tripay'] = 'https://tripay.co.id/api/'; //produksi
 
-$config['kode_merchant'] = 'T1197'; //sandbox
-$config['api_key'] = 'DEV-jdGWqcEiFi3U7YYdSgANI7d1yubL1cgYMPh0zapZ'; //sandbox
-$config['private_key'] = 'kJaqf-bQV3Z-G6ssJ-O23dh-KD9QB'; //sandbox
-$config['url_tripay'] = 'https://payment.tripay.co.id/api-sandbox/'; //sandbox
+$config['kode_merchant'] = 'T5171'; //sandbox
+$config['api_key'] = 'DEV-XdVhe3nAMIezp4OYyNLdb7EhfOjKpXgGRH9RYQXs'; //sandbox
+$config['private_key'] = 'OzuOv-o1W8r-WsF8h-eaLQF-S5dau'; //sandbox
+$config['url_tripay'] = 'https://tripay.co.id/api-sandbox/'; //sandbox
 
+$config['local_base_url'] = 'https://easy-discrete-tahr.ngrok-free.app/';
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

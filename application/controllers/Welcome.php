@@ -96,6 +96,13 @@ class Welcome extends CI_Controller
 			$merchantRef = $inv;
 			$amount = $jumlah;
 
+            $callback_url = base_url('callback/a');
+            $return_url = base_url();
+            if(strlen($this->config->item('local_base_url')) > 0){
+                $callback_url = $this->config->item('local_base_url') . 'callback/a';
+                $return_url = $this->config->item('local_base_url');
+            }
+
 			$data = [
 				'method'            => $metode,
 				'merchant_ref'      => $merchantRef,
@@ -111,8 +118,8 @@ class Welcome extends CI_Controller
 						'quantity'  => 1
 					]
 				],
-				'callback_url'      => base_url('callback/a'),
-				'return_url'        => base_url(),
+				'callback_url'      => $callback_url,
+				'return_url'        => $return_url,
 				'expired_time'      => (time() + (24 * 60 * 60)), // 24 jam
 				'signature'         => hash_hmac('sha256', $merchantCode.$merchantRef.$amount, $privateKey)
 			];
@@ -144,9 +151,9 @@ class Welcome extends CI_Controller
 				'phone' => $cekout->data->customer_phone,
 				'email' => $cekout->data->customer_email,
 				'jumlah' => $cekout->data->amount,
-				'fee' => $cekout->data->fee,
+				'fee' => $cekout->data->total_fee,
 				'diterima' => $cekout->data->amount_received,
-				'bayar' => $cekout->data->is_customer_fee,
+				'bayar' => $cekout->data->fee_customer > 0 ? 1 : 0,
 				'nama_metode' => $cekout->data->payment_name,
 				'metode' => $cekout->data->payment_method,
 				'checkout_url' => $cekout->data->checkout_url,
@@ -208,11 +215,11 @@ class Welcome extends CI_Controller
 			$mesg = $this->load->view('email/konfirmasi_donasi.php', $eml, TRUE);
 			$this->load->library('email', $config);
 
-			$this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
-			$this->email->to($cekout->data->customer_email, $this->config->item('mail_account'));
-			$this->email->subject('Konfirmasi Donasi');
-			$this->email->message($mesg);
-			$this->email->send();
+			// $this->email->from($this->config->item('mail_account'), $this->config->item('app_name'));
+			// $this->email->to($cekout->data->customer_email, $this->config->item('mail_account'));
+			// $this->email->subject('Konfirmasi Donasi');
+			// $this->email->message($mesg);
+			// $this->email->send();
 
 			redirect(base_url('terimakasih/') . $slug);
 		} else {
